@@ -908,47 +908,51 @@ footer p{font-size:14px;color:var(--text-faint);}
       <!-- OVERLAY: hand-drawn arrows + labels ON TOP of app window -->
       <svg class="mockup-overlay" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;">
         <defs>
-          <marker id="ah1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#C9A09A" opacity="0.85"/>
+          <marker id="ah1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#C8BFA8"/>
           </marker>
-          <marker id="ah2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#A0706A" opacity="0.85"/>
+          <marker id="ah2a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#C8BFA8"/>
           </marker>
-          <marker id="ah2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#A0706A" opacity="0.85"/>
+          <marker id="ah2b" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#C8BFA8"/>
           </marker>
-          <marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#B87333" opacity="0.85"/>
+          <marker id="ah3" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L9,3 z" fill="#C8BFA8"/>
           </marker>
         </defs>
 
-        <!-- Arrow 1: mesajı gir — ters yön, metinden ok yönüne -->
-        <path d="M 205,95 C 165,72 125,62 68,68"
-          fill="none" stroke="#C9A09A" stroke-width="2.2"
-          stroke-linecap="round" marker-end="url(#ah1)" opacity="0.85"/>
-        <text x="8" y="50" font-family="'Nothing You Could Do', cursive"
-          font-size="21" fill="#C9A09A" opacity="0.9" data-i18n-svg="arrow1">mesajı gir</text>
+        <!-- Arrow 1: mesajı gir
+             Yazı sol-üst boşlukta (x=12,y=34), ok aşağı-sağa mesaj kutusuna (y≈110) -->
+        <text x="12" y="30" font-family="'Nothing You Could Do', cursive"
+          font-size="23" fill="#C8BFA8" opacity="0.85" data-i18n-svg="arrow1">mesajı gir</text>
+        <path d="M 72,36 C 95,55 130,78 178,103"
+          fill="none" stroke="#C8BFA8" stroke-width="2"
+          stroke-linecap="round" marker-end="url(#ah1)" opacity="0.8"/>
 
-        <!-- Arrow 2a: kişiyi seç — sol alt köşe, ilişki pills'e -->
-        <path d="M 110,200 C 148,192 178,200 208,212"
-          fill="none" stroke="#A0706A" stroke-width="2.2"
-          stroke-linecap="round" marker-end="url(#ah2a)" opacity="0.85"/>
-        <text x="6" y="194" font-family="'Nothing You Could Do', cursive"
-          font-size="21" fill="#A0706A" opacity="0.9" data-i18n-svg="arrow2a">kişiyi seç</text>
+        <!-- Arrow 2a: kişiyi seç
+             Yazı solda, pills satırının 30px üstünde (y=188), ok sağa pills'e (y≈218) -->
+        <text x="12" y="185" font-family="'Nothing You Could Do', cursive"
+          font-size="23" fill="#C8BFA8" opacity="0.85" data-i18n-svg="arrow2a">kişiyi seç</text>
+        <path d="M 115,187 C 148,182 175,193 208,210"
+          fill="none" stroke="#C8BFA8" stroke-width="2"
+          stroke-linecap="round" marker-end="url(#ah2a)" opacity="0.8"/>
 
-        <!-- Arrow 2b: tonu seç — biraz aşağıda, ton pills'e -->
-        <path d="M 92,270 C 130,260 168,265 205,272"
-          fill="none" stroke="#A0706A" stroke-width="2.2"
-          stroke-linecap="round" marker-end="url(#ah2b)" opacity="0.85"/>
-        <text x="6" y="264" font-family="'Nothing You Could Do', cursive"
-          font-size="21" fill="#A0706A" opacity="0.9" data-i18n-svg="arrow2b">tonu seç</text>
+        <!-- Arrow 2b: tonu seç
+             Yazı solda, ton pills 30px üstünde (y=252), ok sağa ton pills'e (y≈268) -->
+        <text x="12" y="250" font-family="'Nothing You Could Do', cursive"
+          font-size="23" fill="#C8BFA8" opacity="0.85" data-i18n-svg="arrow2b">tonu seç</text>
+        <path d="M 100,252 C 135,248 168,256 206,264"
+          fill="none" stroke="#C8BFA8" stroke-width="2"
+          stroke-linecap="round" marker-end="url(#ah2b)" opacity="0.8"/>
 
-        <!-- Arrow 3: alt metin — sağ taraf, result area -->
-        <path d="M 608,360 C 572,368 538,378 510,390"
-          fill="none" stroke="#B87333" stroke-width="2.2"
-          stroke-linecap="round" marker-end="url(#ah3)" opacity="0.85"/>
-        <text x="612" y="352" font-family="'Nothing You Could Do', cursive"
-          font-size="21" fill="#B87333" opacity="0.9" data-i18n-svg="arrow3">alt metin</text>
+        <!-- Arrow 3: alt metin
+             Yazı sağda, result alanının 40px üstünde (y=358), ok sola result'a (y≈390) -->
+        <text x="530" y="355" font-family="'Nothing You Could Do', cursive"
+          font-size="23" fill="#C8BFA8" opacity="0.85" data-i18n-svg="arrow3">alt metin</text>
+        <path d="M 526,358 C 506,366 488,376 468,388"
+          fill="none" stroke="#C8BFA8" stroke-width="2"
+          stroke-linecap="round" marker-end="url(#ah3)" opacity="0.8"/>
       </svg>
       <div class="app-titlebar">
         <div class="traffic" style="background:#FF5F57"></div>
