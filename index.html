@@ -371,6 +371,56 @@ h1 .dim{color:var(--text-faint)}
   white-space:nowrap;
 }
 
+
+/* ── AGENTS SECTION ─────────────────────────── */
+.agents-section{
+  padding:110px 24px;
+  background:var(--bg3);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.agents-inner{
+  max-width:1060px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:start;
+}
+.agents-left h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(28px,3.5vw,44px);font-weight:700;
+  letter-spacing:-0.8px;margin-bottom:28px;line-height:1.15;
+}
+.agents-left p{
+  font-size:16px;color:var(--text-muted);
+  line-height:1.85;font-weight:300;margin-bottom:18px;
+}
+.agents-quote{
+  font-family:'Crimson Pro',serif;
+  font-style:italic;font-size:20px;
+  color:var(--rose) !important;
+  border-left:2px solid var(--rose);
+  padding-left:18px;margin-top:28px !important;
+}
+.agents-right{
+  display:flex;flex-direction:column;gap:16px;
+}
+.agent-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;padding:26px 24px;
+  transition:all .3s;
+}
+.agent-card:hover{
+  border-color:var(--border-strong);
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(44,50,64,0.07);
+}
+.agent-icon{font-size:24px;margin-bottom:12px;}
+.agent-card h4{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.agent-card p{font-size:14px;color:var(--text-muted);line-height:1.7;}
+@media(max-width:768px){
+  .agents-inner{grid-template-columns:1fr;gap:48px;}
+}
+
 /* ── PRO SECTION ─────────────────────────── */
 .pro-section{padding:80px 24px 110px;max-width:1020px;margin:0 auto;}
 .pro-header{text-align:center;margin-bottom:60px;}
@@ -652,6 +702,36 @@ footer p{font-size:14px;color:var(--text-faint);}
   </div>
 </section>
 
+<!-- AI AGENTS SECTION -->
+<section class="agents-section">
+  <div class="agents-inner">
+    <div class="agents-left">
+      <div class="section-label" data-i18n="agents_label">Altyapı</div>
+      <h2 data-i18n="agents_h2">Sıradan bir AI değil.<br>İlişkilerin dilini anlayan ajanlar.</h2>
+      <p data-i18n="agents_p1">WhatYouMean'in arkasında genel amaçlı bir dil modeli yok. Çözümleri üreten yapay zeka ajanlarımız; ilişki dinamikleri, kültürel iletişim örüntüleri ve insanların mesajlarında sakladıkları alt metinler üzerine özel olarak eğitilmiştir.</p>
+      <p data-i18n="agents_p2">Her decode, ajanların binlerce ilişki bağlamından öğrendiği şemalara göre değerlendirilir. Ve sistem asla durmaz — her yeni örüntü, her yeni bağlam, ajanları biraz daha keskin hale getirir.</p>
+      <p class="agents-quote" data-i18n="agents_quote">"Söylediğini değil, kokusunu analiz ediyoruz."</p>
+    </div>
+    <div class="agents-right">
+      <div class="agent-card">
+        <div class="agent-icon">🔬</div>
+        <h4 data-i18n="ag1_h">Özel Eğitim</h4>
+        <p data-i18n="ag1_p">İlişki dinamikleri, pasif agresiflik, sınır ihlalleri ve kültürel iletişim kodları üzerine derinlemesine eğitilmiş ajanlar.</p>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">🌍</div>
+        <h4 data-i18n="ag2_h">Kültürel Zeka</h4>
+        <p data-i18n="ag2_p">Türk dolaylılığından Japon sükutuna, Alman direktliğinden Latin sıcaklığına — her kültürün iletişim genetiğini tanır.</p>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon">📈</div>
+        <h4 data-i18n="ag3_h">Sürekli Gelişim</h4>
+        <p data-i18n="ag3_p">Sistem statik değil. Her yeni bağlam ajanların anlama katmanını genişletir. Bugün keskin, yarın daha da keskin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRO SECTION -->
 <section id="pro" style="background:var(--bg2);padding:2px 0;">
   <div class="pro-section">
@@ -805,7 +885,15 @@ tr:{
   plan_pro_btn:"Pro'ya Geç →",
   cta_h2_1:"Anlamak, insan ilişkilerinin",cta_h2_2:"en güçlü",cta_h2_3:"süper gücüdür.",
   cta_p:"Mesajların arkasını çözmeye bugün başla.",cta_btn:"Hemen Dene — Ücretsiz",
-  footer_p:"Mesajların arkasındaki gerçeği bul."
+  footer_p:"Mesajların arkasındaki gerçeği bul.",
+  agents_label:"Altyapı",
+  agents_h2:"Sıradan bir AI değil.<br>İlişkilerin dilini anlayan ajanlar.",
+  agents_p1:"WhatYouMean'in arkasında genel amaçlı bir dil modeli yok. Çözümleri üreten yapay zeka ajanlarımız; ilişki dinamikleri, kültürel iletişim örüntüleri ve insanların mesajlarında sakladıkları alt metinler üzerine özel olarak eğitilmiştir.",
+  agents_p2:"Her decode, ajanların binlerce ilişki bağlamından öğrendiği şemalara göre değerlendirilir. Ve sistem asla durmaz — her yeni örüntü, her yeni bağlam, ajanları biraz daha keskin hale getirir.",
+  agents_quote:"\"Söylediğini değil, kokusunu analiz ediyoruz.\"",
+  ag1_h:"Özel Eğitim", ag1_p:"İlişki dinamikleri, pasif agresiflik, sınır ihlalleri ve kültürel iletişim kodları üzerine derinlemesine eğitilmiş ajanlar.",
+  ag2_h:"Kültürel Zeka", ag2_p:"Türk dolaylılığından Japon sükutuna, Alman direktliğinden Latin sıcaklığına — her kültürün iletişim genetiğini tanır.",
+  ag3_h:"Sürekli Gelişim", ag3_p:"Sistem statik değil. Her yeni bağlam ajanların anlama katmanını genişletir. Bugün keskin, yarın daha da keskin.",
 },
 en:{
   nav_how:"How It Works",nav_features:"Features",nav_pro:"Pro",nav_pricing:"Pricing",
@@ -854,7 +942,15 @@ en:{
   plan_pro_btn:"Go Pro →",
   cta_h2_1:"Understanding is the most powerful",cta_h2_2:"superpower in",cta_h2_3:"human relationships.",
   cta_p:"Start decoding messages today.",cta_btn:"Try Now — Free",
-  footer_p:"Find the truth behind the message."
+  footer_p:"Find the truth behind the message.",
+  agents_label:"Infrastructure",
+  agents_h2:"Not just AI.<br>Agents trained in the language of relationships.",
+  agents_p1:"There's no general-purpose language model behind WhatYouMean. Our AI agents are purpose-trained on relationship dynamics, cultural communication patterns, and the subtext people hide inside their messages.",
+  agents_p2:"Every decode is evaluated against schemas our agents have learned from thousands of relationship contexts. And the system never stops — every new pattern, every new context makes the agents sharper.",
+  agents_quote:"\"We don't analyze what was said. We analyze its scent.\"",
+  ag1_h:"Purpose-Built Training", ag1_p:"Deeply trained on relationship dynamics, passive aggression, boundary violations and cultural communication codes.",
+  ag2_h:"Cultural Intelligence", ag2_p:"From Turkish indirectness to Japanese silence, German directness to Latin warmth — they know the communication genetics of every culture.",
+  ag3_h:"Continuous Learning", ag3_p:"The system isn't static. Every new context expands the agents' layers of understanding. Sharp today, sharper tomorrow.",
 },
 ru:{
   nav_how:"Как работает",nav_features:"Функции",nav_pro:"Pro",nav_pricing:"Цены",
@@ -903,7 +999,15 @@ ru:{
   plan_pro_btn:"Перейти на Pro →",
   cta_h2_1:"Понимание — самая мощная",cta_h2_2:"суперсила в",cta_h2_3:"человеческих отношениях.",
   cta_p:"Начните расшифровывать сообщения сегодня.",cta_btn:"Попробовать — Бесплатно",
-  footer_p:"Найдите правду за словами."
+  footer_p:"Найдите правду за словами.",
+  agents_label:"Инфраструктура",
+  agents_h2:"Не просто ИИ.<br>Агенты, обученные языку отношений.",
+  agents_p1:"За WhatYouMean не стоит универсальная языковая модель. Наши ИИ-агенты специально обучены на динамике отношений, культурных паттернах общения и скрытом смысле в сообщениях людей.",
+  agents_p2:"Каждая расшифровка оценивается по схемам, которые агенты усвоили из тысяч контекстов отношений. И система не останавливается — каждый новый паттерн делает агентов острее.",
+  agents_quote:"\"Мы анализируем не то, что сказано, а запах слов.\"",
+  ag1_h:"Специализированное обучение", ag1_p:"Глубоко обучены динамике отношений, пассивной агрессии, нарушениям границ и культурным кодам общения.",
+  ag2_h:"Культурный интеллект", ag2_p:"От турецкой косвенности до японского молчания, немецкой прямоты до латинской теплоты — знают генетику общения каждой культуры.",
+  ag3_h:"Непрерывное развитие", ag3_p:"Система не статична. Каждый новый контекст расширяет слои понимания агентов. Острые сегодня, ещё острее завтра.",
 }
 };
 
