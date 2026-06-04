@@ -146,14 +146,170 @@ h1 .dim{color:var(--text-faint)}
 }
 .btn-secondary:hover{color:var(--text);border-color:var(--border-strong);}
 
-/* ── FIELD ATLAS VISUAL ──────────────────── */
-.field-atlas-wrap{
-  width:100%;max-width:660px;
-  border-radius:28px;overflow:hidden;
+
+/* ── FIELD ATLAS HTML REBUILD ──────────────── */
+.atlas-wrap{
+  width:100%;max-width:720px;
+  background:#F5F0E8;
   border:1px solid var(--border-strong);
-  box-shadow:0 40px 100px rgba(44,50,64,0.15),0 2px 0 rgba(255,255,255,0.8);
+  border-radius:28px;overflow:hidden;
+  box-shadow:0 40px 100px rgba(44,50,64,0.14),0 2px 0 rgba(255,255,255,0.9);
+  font-family:'Inter',sans-serif;
 }
-.field-atlas-wrap img{width:100%;display:block;}
+
+/* radar */
+.atlas-radar{
+  background:#F0EBE1;
+  border-bottom:1px solid var(--border);
+  padding:36px 24px 28px;
+  display:flex;justify-content:center;
+}
+.atlas-radar-inner{position:relative;width:260px;height:260px;}
+.radar-svg{width:100%;height:100%;}
+.radar-ann{
+  position:absolute;
+  font-size:11px;font-weight:500;
+  color:var(--text-faint);
+  font-family:'JetBrains Mono','IBM Plex Mono',monospace;
+  white-space:nowrap;letter-spacing:0.3px;
+}
+
+/* headline */
+.atlas-headline{
+  padding:28px 36px 4px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.atlas-hl-top{
+  font-family:'Crimson Pro',serif;
+  font-size:clamp(22px,3.5vw,36px);
+  font-weight:600;letter-spacing:0.5px;
+  color:var(--slate);line-height:1.15;
+}
+.atlas-hl-bot{
+  font-family:'Crimson Pro',serif;
+  font-size:clamp(22px,3.5vw,36px);
+  font-style:italic;letter-spacing:0.5px;
+  color:var(--rose);line-height:1.15;margin-bottom:16px;
+}
+
+/* pull quote */
+.atlas-quote{
+  padding:16px 36px 20px;
+  text-align:center;
+  font-family:'Crimson Pro',serif;
+  font-style:italic;
+  font-size:clamp(14px,1.8vw,17px);
+  color:var(--text-muted);
+  border-bottom:1px solid var(--border);
+}
+
+/* 3 feature cards */
+.atlas-cards{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:0;border-bottom:1px solid var(--border);
+}
+.atlas-card{
+  padding:22px 20px;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.atlas-card:last-child{border-right:none;}
+.atlas-card.dna{background:rgba(184,115,51,0.03);}
+.atlas-card.mem{background:rgba(139,123,168,0.03);}
+.atlas-card.red{background:rgba(160,112,106,0.03);}
+.atlas-card-badge{
+  position:absolute;top:14px;right:14px;
+  font-size:9px;font-weight:700;letter-spacing:1px;
+  padding:3px 8px;border-radius:50px;
+}
+.dna .atlas-card-badge{background:rgba(184,115,51,0.15);color:var(--copper);}
+.mem .atlas-card-badge{background:rgba(139,123,168,0.15);color:var(--lavender);}
+.red .atlas-card-badge{background:rgba(44,50,64,0.08);color:var(--text-faint);}
+.atlas-card-sym{font-size:18px;margin-bottom:10px;color:var(--copper);}
+.mem .atlas-card-sym{color:var(--lavender);}
+.red .atlas-card-sym{color:var(--rose);}
+.atlas-card-title{
+  font-size:11px;font-weight:700;letter-spacing:0.8px;
+  color:var(--slate);margin-bottom:4px;
+}
+.atlas-card-sub{
+  font-size:10px;color:var(--text-faint);
+  font-style:italic;font-family:'Crimson Pro',serif;
+  margin-bottom:10px;
+}
+.atlas-card-body{
+  font-size:13px;color:var(--text-muted);line-height:1.6;
+}
+
+/* pro strip */
+.atlas-pro-strip{
+  padding:24px 28px;
+  background:#EDE8DE;
+  border-bottom:1px solid var(--border);
+}
+.atlas-pro-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  color:var(--copper);text-transform:uppercase;
+  text-align:center;margin-bottom:16px;
+}
+.atlas-pro-pills{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;
+}
+.atlas-pro-pill{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:12px 14px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.pill-icon{font-size:16px;flex-shrink:0;margin-top:2px;}
+.pill-title{
+  font-size:12px;font-weight:600;
+  color:var(--slate);margin-bottom:4px;
+}
+.pill-eg{
+  font-size:11px;color:var(--text-faint);
+  font-family:'Crimson Pro',serif;font-style:italic;
+  line-height:1.4;
+}
+
+/* bottom quote */
+.atlas-bottom{
+  padding:24px 36px 20px;text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.atlas-bottom-q{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(15px,2vw,20px);font-weight:600;
+  color:var(--slate);margin-bottom:8px;letter-spacing:-0.3px;
+}
+.atlas-bottom-en{
+  font-family:'Crimson Pro',serif;
+  font-style:italic;font-size:clamp(13px,1.5vw,16px);
+  color:var(--rose);
+}
+
+/* annotation footer */
+.atlas-footer-ann{
+  padding:12px 24px;
+  display:flex;justify-content:space-between;
+  font-size:10px;color:var(--text-faint);
+  font-family:'JetBrains Mono','IBM Plex Mono',monospace;
+  letter-spacing:0.3px;
+  background:#EDE8DE;
+}
+
+/* remove old field-atlas-wrap style if present */
+.field-atlas-wrap{display:none;}
+
+@media(max-width:600px){
+  .atlas-cards{grid-template-columns:1fr;}
+  .atlas-card{border-right:none;border-bottom:1px solid var(--border);}
+  .atlas-pro-pills{grid-template-columns:1fr;}
+  .atlas-footer-ann{flex-direction:column;gap:4px;}
+}
+
+/* ── FIELD ATLAS VISUAL ──────────────────── */
+/* field-atlas-wrap replaced by .atlas-wrap */
 
 /* ── DIVIDER ─────────────────────────────── */
 .divider{
@@ -560,8 +716,139 @@ footer p{font-size:14px;color:var(--text-faint);}
     </a>
     <a href="#nasil-calisir" class="btn-secondary" data-i18n="hero_how">Nasıl çalışır?</a>
   </div>
-  <div class="field-atlas-wrap">
-    <img src="visual.png" alt="WhatYouMean Field Atlas">
+  <!-- FIELD ATLAS — HTML rebuild, no image -->
+  <div class="atlas-wrap">
+
+    <!-- TOP: sonar radar -->
+    <div class="atlas-radar">
+      <div class="atlas-radar-inner">
+        <svg class="radar-svg" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- concentric rings -->
+          <circle cx="130" cy="130" r="120" fill="none" stroke="#C8BFA8" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="130" cy="130" r="95"  fill="none" stroke="#C8BFA8" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="130" cy="130" r="70"  fill="none" stroke="#C8BFA8" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="130" cy="130" r="46"  fill="none" stroke="#C8BFA8" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="130" cy="130" r="22"  fill="none" stroke="#C8BFA8" stroke-width="1"   opacity="0.7"/>
+          <!-- 36 spokes -->
+          <g stroke="#E4DDD1" stroke-width="0.6" opacity="0.7">
+            <line x1="130" y1="10"  x2="130" y2="250"/>
+            <line x1="10"  y1="130" x2="250" y2="130"/>
+            <line x1="37"  y1="37"  x2="223" y2="223"/>
+            <line x1="223" y1="37"  x2="37"  y2="223"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(20,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(40,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(60,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(80,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(100,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(120,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(140,130,130)"/>
+            <line x1="130" y1="10"  x2="130" y2="250" transform="rotate(160,130,130)"/>
+          </g>
+          <!-- 4 copper cardinal lines -->
+          <line x1="130" y1="10"  x2="130" y2="250" stroke="#B87333" stroke-width="1.5" opacity="0.6"/>
+          <line x1="10"  y1="130" x2="250" y2="130" stroke="#B87333" stroke-width="1.5" opacity="0.6"/>
+          <!-- cardinal dots -->
+          <circle cx="130" cy="10"  r="4" fill="#B87333" opacity="0.7"/>
+          <circle cx="130" cy="250" r="4" fill="#B87333" opacity="0.7"/>
+          <circle cx="10"  cy="130" r="4" fill="#B87333" opacity="0.7"/>
+          <circle cx="250" cy="130" r="4" fill="#B87333" opacity="0.7"/>
+          <!-- inner circle -->
+          <circle cx="130" cy="130" r="20" fill="#EDE8DE" stroke="#C8BFA8" stroke-width="1.5"/>
+          <!-- DNA helix dots -->
+          <circle cx="122" cy="118" r="3.5" fill="#B87333"/>
+          <circle cx="138" cy="122" r="3.5" fill="#2C3240"/>
+          <circle cx="124" cy="130" r="3.5" fill="#B87333"/>
+          <circle cx="136" cy="130" r="3.5" fill="#2C3240"/>
+          <circle cx="122" cy="138" r="3.5" fill="#B87333"/>
+          <circle cx="138" cy="142" r="3.5" fill="#2C3240"/>
+          <line x1="122" y1="118" x2="138" y2="122" stroke="#C8BFA8" stroke-width="1"/>
+          <line x1="124" y1="130" x2="136" y2="130" stroke="#C8BFA8" stroke-width="1"/>
+          <line x1="122" y1="138" x2="138" y2="142" stroke="#C8BFA8" stroke-width="1"/>
+        </svg>
+        <!-- annotation labels around radar -->
+        <div class="radar-ann" style="top:6px;left:50%;transform:translateX(-50%)">decode confidence</div>
+        <div class="radar-ann" style="bottom:6px;left:50%;transform:translateX(-50%)">cultural weight</div>
+        <div class="radar-ann" style="left:0;top:50%;transform:translateY(-50%)">resonance: 0.97</div>
+        <div class="radar-ann" style="right:0;top:50%;transform:translateY(-50%);text-align:right">strata: 4 layers</div>
+      </div>
+    </div>
+
+    <!-- HEADLINE -->
+    <div class="atlas-headline">
+      <div class="atlas-hl-top" data-i18n="atlas_h1">THE ARCHITECTURE</div>
+      <div class="atlas-hl-bot" data-i18n="atlas_h2">OF UNSPOKEN THINGS</div>
+    </div>
+
+    <!-- PULL QUOTE -->
+    <div class="atlas-quote">
+      <span data-i18n="atlas_quote">"We decode not what was said, but what could not be."</span>
+    </div>
+
+    <!-- 3 FEATURE CARDS -->
+    <div class="atlas-cards">
+      <div class="atlas-card dna">
+        <div class="atlas-card-badge" data-i18n="atlas_badge_pro">PRO</div>
+        <div class="atlas-card-sym">⌬</div>
+        <div class="atlas-card-title" data-i18n="atlas_c1_h">KÜLTÜREL GENETİK</div>
+        <div class="atlas-card-sub" data-i18n="atlas_c1_sub">Cultural DNA Layer</div>
+        <div class="atlas-card-body" data-i18n="atlas_c1_p">Japon sükutu, Türk dolaylılığı, Alman direktliği — her kültürün iletişim kodunu çözüyoruz.</div>
+      </div>
+      <div class="atlas-card mem">
+        <div class="atlas-card-badge" data-i18n="atlas_badge_pro2">PRO</div>
+        <div class="atlas-card-sym">◎</div>
+        <div class="atlas-card-title" data-i18n="atlas_c2_h">MEMORY ENGINE</div>
+        <div class="atlas-card-sub" data-i18n="atlas_c2_sub">Relationship Cartography</div>
+        <div class="atlas-card-body" data-i18n="atlas_c2_p">"Abimin iş arkadaşı" · "Yeni kavga ettiğim kız arkadaşım" — bağlam her şeyi değiştirir.</div>
+      </div>
+      <div class="atlas-card red">
+        <div class="atlas-card-badge" data-i18n="atlas_badge_soon">YAKINDA</div>
+        <div class="atlas-card-sym">△</div>
+        <div class="atlas-card-title" data-i18n="atlas_c3_h">RED FLAG DETECTOR</div>
+        <div class="atlas-card-sub" data-i18n="atlas_c3_sub">Pattern Recognition</div>
+        <div class="atlas-card-body" data-i18n="atlas_c3_p">Manipülasyon, gaslighting, sınır ihlali — tekrar eden örüntüleri tespit eder.</div>
+      </div>
+    </div>
+
+    <!-- PRO CONTEXT STRIP -->
+    <div class="atlas-pro-strip">
+      <div class="atlas-pro-label" data-i18n="atlas_pro_label">PRO · CONTEXT INTELLIGENCE</div>
+      <div class="atlas-pro-pills">
+        <div class="atlas-pro-pill">
+          <span class="pill-icon">👤</span>
+          <div>
+            <div class="pill-title" data-i18n="atlas_pill1_t">Yaş & Profil</div>
+            <div class="pill-eg" data-i18n="atlas_pill1_eg">"45 yaşında otoriter bir baba"</div>
+          </div>
+        </div>
+        <div class="atlas-pro-pill">
+          <span class="pill-icon">💬</span>
+          <div>
+            <div class="pill-title" data-i18n="atlas_pill2_t">İlişki Tanımı</div>
+            <div class="pill-eg" data-i18n="atlas_pill2_eg">"Yeni kavga ettiğim kız arkadaşım"</div>
+          </div>
+        </div>
+        <div class="atlas-pro-pill">
+          <span class="pill-icon">📖</span>
+          <div>
+            <div class="pill-title" data-i18n="atlas_pill3_t">Bağlam Hafızası</div>
+            <div class="pill-eg" data-i18n="atlas_pill3_eg">"Daha ilk mesajlaşmalarımız"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM QUOTE -->
+    <div class="atlas-bottom">
+      <div class="atlas-bottom-q" data-i18n="atlas_bottom_q">Söylediğini değil, ne demek istediğini anlıyoruz.</div>
+      <div class="atlas-bottom-en" data-i18n="atlas_bottom_en">Understanding is the most powerful superpower in human relationships.</div>
+    </div>
+
+    <!-- ANNOTATION FOOTER -->
+    <div class="atlas-footer-ann">
+      <span>WhatYouMean · AI Subtext Decoder</span>
+      <span>Field Atlas v2.0 · Spectral Cartography</span>
+    </div>
+
   </div>
 </section>
 
@@ -886,6 +1173,18 @@ tr:{
   cta_h2_1:"Anlamak, insan ilişkilerinin",cta_h2_2:"en güçlü",cta_h2_3:"süper gücüdür.",
   cta_p:"Mesajların arkasını çözmeye bugün başla.",cta_btn:"Hemen Dene — Ücretsiz",
   footer_p:"Mesajların arkasındaki gerçeği bul.",
+  atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
+  atlas_quote:"\"We decode not what was said, but what could not be.\"",
+  atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"YAKINDA",
+  atlas_c1_h:"KÜLTÜREL GENETİK", atlas_c1_sub:"Cultural DNA Layer", atlas_c1_p:"Japon sükutu, Türk dolaylılığı, Alman direktliği — her kültürün iletişim kodunu çözüyoruz.",
+  atlas_c2_h:"MEMORY ENGINE", atlas_c2_sub:"Relationship Cartography", atlas_c2_p:"\"Abimin iş arkadaşı\" · \"Yeni kavga ettiğim kız arkadaşım\" — bağlam her şeyi değiştirir.",
+  atlas_c3_h:"RED FLAG DETECTOR", atlas_c3_sub:"Pattern Recognition", atlas_c3_p:"Manipülasyon, gaslighting, sınır ihlali — tekrar eden örüntüleri tespit eder.",
+  atlas_pro_label:"PRO · CONTEXT INTELLIGENCE",
+  atlas_pill1_t:"Yaş & Profil", atlas_pill1_eg:"\"45 yaşında otoriter bir baba\"",
+  atlas_pill2_t:"İlişki Tanımı", atlas_pill2_eg:"\"Yeni kavga ettiğim kız arkadaşım\"",
+  atlas_pill3_t:"Bağlam Hafızası", atlas_pill3_eg:"\"Daha ilk mesajlaşmalarımız\"",
+  atlas_bottom_q:"Söylediğini değil, ne demek istediğini anlıyoruz.",
+  atlas_bottom_en:"Understanding is the most powerful superpower in human relationships.",
   agents_label:"Altyapı",
   agents_h2:"Sıradan bir AI değil.<br>İlişkilerin dilini anlayan ajanlar.",
   agents_p1:"WhatYouMean'in arkasında genel amaçlı bir dil modeli yok. Çözümleri üreten yapay zeka ajanlarımız; ilişki dinamikleri, kültürel iletişim örüntüleri ve insanların mesajlarında sakladıkları alt metinler üzerine özel olarak eğitilmiştir.",
@@ -943,6 +1242,18 @@ en:{
   cta_h2_1:"Understanding is the most powerful",cta_h2_2:"superpower in",cta_h2_3:"human relationships.",
   cta_p:"Start decoding messages today.",cta_btn:"Try Now — Free",
   footer_p:"Find the truth behind the message.",
+  atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
+  atlas_quote:"\"We decode not what was said, but what could not be.\"",
+  atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"COMING SOON",
+  atlas_c1_h:"CULTURAL GENETICS", atlas_c1_sub:"Cultural DNA Layer", atlas_c1_p:"Japanese silence, Turkish indirectness, German directness — we decode each culture's communication code.",
+  atlas_c2_h:"MEMORY ENGINE", atlas_c2_sub:"Relationship Cartography", atlas_c2_p:"\"My brother's coworker\" · \"My girlfriend I just fought with\" — context changes everything.",
+  atlas_c3_h:"RED FLAG DETECTOR", atlas_c3_sub:"Pattern Recognition", atlas_c3_p:"Manipulation, gaslighting, boundary violations — detects recurring patterns.",
+  atlas_pro_label:"PRO · CONTEXT INTELLIGENCE",
+  atlas_pill1_t:"Age & Profile", atlas_pill1_eg:"\"45, authoritative, avoids emotions\"",
+  atlas_pill2_t:"Relationship Context", atlas_pill2_eg:"\"My girlfriend I just had a fight with\"",
+  atlas_pill3_t:"Context Memory", atlas_pill3_eg:"\"We just started talking\"",
+  atlas_bottom_q:"Not what they said — what they meant.",
+  atlas_bottom_en:"Understanding is the most powerful superpower in human relationships.",
   agents_label:"Infrastructure",
   agents_h2:"Not just AI.<br>Agents trained in the language of relationships.",
   agents_p1:"There's no general-purpose language model behind WhatYouMean. Our AI agents are purpose-trained on relationship dynamics, cultural communication patterns, and the subtext people hide inside their messages.",
@@ -1000,6 +1311,18 @@ ru:{
   cta_h2_1:"Понимание — самая мощная",cta_h2_2:"суперсила в",cta_h2_3:"человеческих отношениях.",
   cta_p:"Начните расшифровывать сообщения сегодня.",cta_btn:"Попробовать — Бесплатно",
   footer_p:"Найдите правду за словами.",
+  atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
+  atlas_quote:"\"Мы расшифровываем не то, что было сказано, а то, что не могло быть сказано.\"",
+  atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"СКОРО",
+  atlas_c1_h:"КУЛЬТУРНАЯ ГЕНЕТИКА", atlas_c1_sub:"Cultural DNA Layer", atlas_c1_p:"Японское молчание, турецкая косвенность, немецкая прямота — расшифровываем код каждой культуры.",
+  atlas_c2_h:"MEMORY ENGINE", atlas_c2_sub:"Relationship Cartography", atlas_c2_p:"\"Коллега моего брата\" · \"Девушка, с которой я поругался\" — контекст меняет всё.",
+  atlas_c3_h:"RED FLAG DETECTOR", atlas_c3_sub:"Pattern Recognition", atlas_c3_p:"Манипуляции, газлайтинг, нарушения границ — выявляет повторяющиеся паттерны.",
+  atlas_pro_label:"PRO · КОНТЕКСТНЫЙ ИНТЕЛЛЕКТ",
+  atlas_pill1_t:"Возраст и профиль", atlas_pill1_eg:"\"45 лет, авторитарный\"",
+  atlas_pill2_t:"Контекст отношений", atlas_pill2_eg:"\"Девушка, с которой я поругался\"",
+  atlas_pill3_t:"Память контекста", atlas_pill3_eg:"\"Мы только начали общаться\"",
+  atlas_bottom_q:"Не то, что сказали — то, что имели в виду.",
+  atlas_bottom_en:"Understanding is the most powerful superpower in human relationships.",
   agents_label:"Инфраструктура",
   agents_h2:"Не просто ИИ.<br>Агенты, обученные языку отношений.",
   agents_p1:"За WhatYouMean не стоит универсальная языковая модель. Наши ИИ-агенты специально обучены на динамике отношений, культурных паттернах общения и скрытом смысле в сообщениях людей.",
