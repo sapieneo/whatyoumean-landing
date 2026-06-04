@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WhatYouMean — Mesajların Arkasını Çöz</title>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Poiret+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Poiret+One&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -523,8 +523,15 @@ h1 .dim{color:var(--text-faint)}
 .arrow-label{
   font-size:13px;font-weight:500;
   color:var(--text-muted);
-  font-family:'Crimson Pro',serif;font-style:italic;
+  font-family:'Nothing You Could Do',cursive;
   white-space:nowrap;
+}
+/* overlay SVG sits on top of app window */
+.mockup-overlay{
+  position:absolute;inset:0;
+  pointer-events:none;
+  z-index:10;
+  overflow:visible;
 }
 
 
@@ -897,28 +904,42 @@ footer p{font-size:14px;color:var(--text-faint);}
   <p class="sub" data-i18n="mockup_sub">Yapıştır, kişiyi seç, çöz. 3 adım, 10 saniye.</p>
 
   <div class="mockup-outer">
-    <!-- Curved arrow: mesajı gir -->
-    <svg style="position:absolute;left:-110px;top:80px;overflow:visible;" width="120" height="90" viewBox="0 0 120 90">
-      <path d="M10,10 Q80,10 105,65" fill="none" stroke="#B87333" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
-      <polygon points="105,65 95,58 112,56" fill="#B87333" opacity="0.6"/>
-    </svg>
-    <div style="position:absolute;left:-108px;top:12px;text-align:right;" class="arrow-label" data-i18n="arrow1">mesajı gir</div>
+    <div class="app-window" style="position:relative;">
+      <!-- OVERLAY: hand-drawn arrows + labels ON TOP of app window -->
+      <svg class="mockup-overlay" viewBox="0 0 720 520" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:10;">
+        <defs>
+          <marker id="ah1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#C9A09A" opacity="0.85"/>
+          </marker>
+          <marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#8B7BA8" opacity="0.85"/>
+          </marker>
+          <marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#B87333" opacity="0.85"/>
+          </marker>
+        </defs>
 
-    <!-- Curved arrow: ilişki & ton -->
-    <svg style="position:absolute;left:-140px;top:200px;overflow:visible;" width="150" height="80" viewBox="0 0 150 80">
-      <path d="M10,20 Q60,0 135,55" fill="none" stroke="#8B7BA8" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
-      <polygon points="135,55 122,52 130,65" fill="#8B7BA8" opacity="0.6"/>
-    </svg>
-    <div style="position:absolute;left:-138px;top:175px;text-align:right;" class="arrow-label" data-i18n="arrow2">ilişki & ton</div>
+        <!-- Arrow 1: mesajı gir — top left, points to message input ~y=110 -->
+        <path d="M 95,58 C 130,42 170,55 200,105"
+          fill="none" stroke="#C9A09A" stroke-width="2.2"
+          stroke-linecap="round" marker-end="url(#ah1)" opacity="0.85"/>
+        <text x="30" y="52" font-family="'Nothing You Could Do', cursive"
+          font-size="22" fill="#C9A09A" opacity="0.9" data-i18n-svg="arrow1">mesajı gir</text>
 
-    <!-- Curved arrow: alt metin -->
-    <svg style="position:absolute;right:-130px;top:280px;overflow:visible;" width="140" height="80" viewBox="0 0 140 80">
-      <path d="M130,20 Q80,0 10,55" fill="none" stroke="#A0706A" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.6"/>
-      <polygon points="10,55 22,48 14,62" fill="#A0706A" opacity="0.6"/>
-    </svg>
-    <div style="position:absolute;right:-128px;top:175px;text-align:left;" class="arrow-label" data-i18n="arrow3">alt metin</div>
+        <!-- Arrow 2: ilişki & ton — left side, points to pills ~y=255 -->
+        <path d="M 105,218 C 145,210 175,225 205,248"
+          fill="none" stroke="#8B7BA8" stroke-width="2.2"
+          stroke-linecap="round" marker-end="url(#ah2)" opacity="0.85"/>
+        <text x="14" y="212" font-family="'Nothing You Could Do', cursive"
+          font-size="22" fill="#8B7BA8" opacity="0.9" data-i18n-svg="arrow2">ilişki &amp; ton</text>
 
-    <div class="app-window">
+        <!-- Arrow 3: alt metin — right side, points to result area ~y=380 -->
+        <path d="M 612,345 C 578,355 540,368 510,385"
+          fill="none" stroke="#B87333" stroke-width="2.2"
+          stroke-linecap="round" marker-end="url(#ah3)" opacity="0.85"/>
+        <text x="618" y="338" font-family="'Nothing You Could Do', cursive"
+          font-size="22" fill="#B87333" opacity="0.9" data-i18n-svg="arrow3">alt metin</text>
+      </svg>
       <div class="app-titlebar">
         <div class="traffic" style="background:#FF5F57"></div>
         <div class="traffic" style="background:#FFBD2E"></div>
@@ -1341,6 +1362,11 @@ function setLang(lang){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const k=el.getAttribute('data-i18n');
     if(i18n[lang]?.[k])el.innerHTML=i18n[lang][k];
+  });
+  // SVG text elements
+  document.querySelectorAll('[data-i18n-svg]').forEach(el=>{
+    const k=el.getAttribute('data-i18n-svg');
+    if(i18n[lang]?.[k])el.textContent=i18n[lang][k];
   });
   document.documentElement.lang=lang;
 }
