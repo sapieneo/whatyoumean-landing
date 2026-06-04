@@ -911,34 +911,44 @@ footer p{font-size:14px;color:var(--text-faint);}
           <marker id="ah1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
             <path d="M0,0 L0,6 L8,3 z" fill="#C9A09A" opacity="0.85"/>
           </marker>
-          <marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#8B7BA8" opacity="0.85"/>
+          <marker id="ah2a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#A0706A" opacity="0.85"/>
+          </marker>
+          <marker id="ah2b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#A0706A" opacity="0.85"/>
           </marker>
           <marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
             <path d="M0,0 L0,6 L8,3 z" fill="#B87333" opacity="0.85"/>
           </marker>
         </defs>
 
-        <!-- Arrow 1: mesajı gir — top left, points to message input ~y=110 -->
-        <path d="M 95,58 C 130,42 170,55 200,105"
+        <!-- Arrow 1: mesajı gir — ters yön, metinden ok yönüne -->
+        <path d="M 205,95 C 165,72 125,62 68,68"
           fill="none" stroke="#C9A09A" stroke-width="2.2"
           stroke-linecap="round" marker-end="url(#ah1)" opacity="0.85"/>
-        <text x="30" y="52" font-family="'Nothing You Could Do', cursive"
-          font-size="22" fill="#C9A09A" opacity="0.9" data-i18n-svg="arrow1">mesajı gir</text>
+        <text x="8" y="50" font-family="'Nothing You Could Do', cursive"
+          font-size="21" fill="#C9A09A" opacity="0.9" data-i18n-svg="arrow1">mesajı gir</text>
 
-        <!-- Arrow 2: ilişki & ton — left side, points to pills ~y=255 -->
-        <path d="M 105,218 C 145,210 175,225 205,248"
-          fill="none" stroke="#8B7BA8" stroke-width="2.2"
-          stroke-linecap="round" marker-end="url(#ah2)" opacity="0.85"/>
-        <text x="14" y="212" font-family="'Nothing You Could Do', cursive"
-          font-size="22" fill="#8B7BA8" opacity="0.9" data-i18n-svg="arrow2">ilişki &amp; ton</text>
+        <!-- Arrow 2a: kişiyi seç — sol alt köşe, ilişki pills'e -->
+        <path d="M 110,200 C 148,192 178,200 208,212"
+          fill="none" stroke="#A0706A" stroke-width="2.2"
+          stroke-linecap="round" marker-end="url(#ah2a)" opacity="0.85"/>
+        <text x="6" y="194" font-family="'Nothing You Could Do', cursive"
+          font-size="21" fill="#A0706A" opacity="0.9" data-i18n-svg="arrow2a">kişiyi seç</text>
 
-        <!-- Arrow 3: alt metin — right side, points to result area ~y=380 -->
-        <path d="M 612,345 C 578,355 540,368 510,385"
+        <!-- Arrow 2b: tonu seç — biraz aşağıda, ton pills'e -->
+        <path d="M 92,270 C 130,260 168,265 205,272"
+          fill="none" stroke="#A0706A" stroke-width="2.2"
+          stroke-linecap="round" marker-end="url(#ah2b)" opacity="0.85"/>
+        <text x="6" y="264" font-family="'Nothing You Could Do', cursive"
+          font-size="21" fill="#A0706A" opacity="0.9" data-i18n-svg="arrow2b">tonu seç</text>
+
+        <!-- Arrow 3: alt metin — sağ taraf, result area -->
+        <path d="M 608,360 C 572,368 538,378 510,390"
           fill="none" stroke="#B87333" stroke-width="2.2"
           stroke-linecap="round" marker-end="url(#ah3)" opacity="0.85"/>
-        <text x="618" y="338" font-family="'Nothing You Could Do', cursive"
-          font-size="22" fill="#B87333" opacity="0.9" data-i18n-svg="arrow3">alt metin</text>
+        <text x="612" y="352" font-family="'Nothing You Could Do', cursive"
+          font-size="21" fill="#B87333" opacity="0.9" data-i18n-svg="arrow3">alt metin</text>
       </svg>
       <div class="app-titlebar">
         <div class="traffic" style="background:#FF5F57"></div>
@@ -1161,7 +1171,7 @@ tr:{
   step2_h:"Kişi & ton seç",step2_p:"Kim gönderdi? Hangi tonda çözülsün — dürüst, şefkatli, komik?",
   step3_h:"Alt metni gör",step3_p:"AI mesajın arkasındaki gerçek duyguyu ve önerilen yanıtı üretir.",
   mockup_label:"Uygulamayı Gör",mockup_h2:"Bir mesajı çözmek hiç bu kadar kolay olmamıştı",mockup_sub:"Yapıştır, kişiyi seç, çöz. 3 adım, 10 saniye.",
-  arrow1:"mesajı gir",arrow2:"ilişki & ton",arrow3:"alt metin",
+  arrow1:"mesajı gir",arrow2a:"kişiyi seç",arrow2b:"tonu seç",arrow3:"alt metin",
   app_msg_label:"Mesaj",app_msg:"\"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂\"",
   app_rel_label:"Kim gönderdi?",app_tone_label:"Ton",
   app_decode_btn:"Çöz →",app_result_label:"Alt Metin",
@@ -1230,7 +1240,7 @@ en:{
   step2_h:"Choose person & tone",step2_p:"Who sent it? What tone — honest, compassionate, funny?",
   step3_h:"See the subtext",step3_p:"AI reveals the real emotion and suggests a reply.",
   mockup_label:"See the App",mockup_h2:"Decoding a message has never been this easy",mockup_sub:"Paste, select, decode. 3 steps, 10 seconds.",
-  arrow1:"enter message",arrow2:"person & tone",arrow3:"subtext",
+  arrow1:"enter message",arrow2a:"choose person",arrow2b:"choose tone",arrow3:"subtext",
   app_msg_label:"Message",app_msg:"\"Fine, whatever you think is best 🙂\"",
   app_rel_label:"Who sent it?",app_tone_label:"Tone",
   app_decode_btn:"Decode →",app_result_label:"Subtext",
@@ -1299,7 +1309,7 @@ ru:{
   step2_h:"Выберите тон",step2_p:"Кто отправил? Какой тон — честный, сочувственный, юмористический?",
   step3_h:"Увидьте скрытый смысл",step3_p:"ИИ раскрывает настоящую эмоцию и предлагает ответ.",
   mockup_label:"Смотреть приложение",mockup_h2:"Расшифровать сообщение ещё никогда не было так просто",mockup_sub:"Вставьте, выберите, расшифруйте. 3 шага, 10 секунд.",
-  arrow1:"введите сообщение",arrow2:"человек и тон",arrow3:"скрытый смысл",
+  arrow1:"введите сообщение",arrow2a:"выберите человека",arrow2b:"выберите тон",arrow3:"скрытый смысл",
   app_msg_label:"Сообщение",app_msg:"\"Ладно, как хочешь, так и делай 🙂\"",
   app_rel_label:"Кто отправил?",app_tone_label:"Тон",
   app_decode_btn:"Расшифровать →",app_result_label:"Скрытый смысл",
