@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatYouMean — Mesajların Arkasını Çöz</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --mint:#5FF5B5;
+  --mint-dim:#3DD494;
+  --mint-glow:rgba(95,245,181,0.15);
+  --mint-glow-strong:rgba(95,245,181,0.25);
+  --bg:#0A0D0C;
+  --bg2:#0F1410;
+  --bg3:#141A16;
+  --glass:rgba(255,255,255,0.04);
+  --glass-border:rgba(255,255,255,0.08);
+  --glass-hover:rgba(255,255,255,0.07);
+  --text:#F0F4F1;
+  --text-muted:rgba(240,244,241,0.55);
+  --text-faint:rgba(240,244,241,0.3);
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* NOISE OVERLAY */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:0.4;
+}
+
+/* BACKGROUND ORBS */
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;
+  z-index:0;
+}
+.orb1{
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(95,245,181,0.08) 0%, transparent 70%);
+  top:-200px;left:-200px;
+}
+.orb2{
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(95,245,181,0.05) 0%, transparent 70%);
+  bottom:10%;right:-150px;
+}
+
+/* STICKY HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,13,12,0.75);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--glass-border);
+  transition:all .3s;
+}
+.logo{
+  font-family:'Comfortaa',sans-serif;
+  font-size:20px;font-weight:700;
+  color:var(--mint);
+  letter-spacing:-0.3px;
+  text-decoration:none;
+}
+.logo span{color:var(--text);opacity:0.7}
+nav{display:flex;align-items:center;gap:32px}
+nav a{
+  color:var(--text-muted);
+  text-decoration:none;
+  font-size:14px;font-weight:400;
+  transition:color .2s;
+}
+nav a:hover{color:var(--text)}
+.cta-btn{
+  background:var(--mint);
+  color:#0A0D0C;
+  padding:10px 24px;
+  border-radius:50px;
+  font-size:14px;font-weight:600;
+  text-decoration:none;
+  font-family:'Inter',sans-serif;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.cta-btn:hover{
+  background:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 8px 30px rgba(95,245,181,0.3);
+}
+
+/* SECTIONS */
+section{position:relative;z-index:1}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  padding:6px 16px;
+  border-radius:50px;
+  font-size:12px;font-weight:500;
+  color:var(--mint);
+  margin-bottom:32px;
+  letter-spacing:0.5px;
+}
+.hero-tag span{
+  width:6px;height:6px;
+  background:var(--mint);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+h1{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(42px,6vw,80px);
+  font-weight:700;
+  line-height:1.1;
+  letter-spacing:-1.5px;
+  margin-bottom:24px;
+  max-width:820px;
+}
+h1 .mint{color:var(--mint)}
+h1 .dim{opacity:0.45}
+.hero-sub{
+  font-size:clamp(16px,2vw,20px);
+  color:var(--text-muted);
+  max-width:520px;
+  margin-bottom:48px;
+  font-weight:300;
+  line-height:1.7;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:16px;
+  flex-wrap:wrap;justify-content:center;
+}
+.btn-primary{
+  background:var(--mint);
+  color:#0A0D0C;
+  padding:14px 36px;
+  border-radius:50px;
+  font-size:16px;font-weight:600;
+  text-decoration:none;
+  font-family:'Inter',sans-serif;
+  transition:all .25s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{
+  background:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 12px 40px rgba(95,245,181,0.35);
+}
+.btn-secondary{
+  color:var(--text-muted);
+  padding:14px 28px;
+  font-size:15px;
+  text-decoration:none;
+  border:1px solid var(--glass-border);
+  border-radius:50px;
+  transition:all .25s;
+  font-family:'Inter',sans-serif;
+}
+.btn-secondary:hover{color:var(--text);border-color:rgba(255,255,255,0.2)}
+
+/* HERO DEMO CARD */
+.hero-demo{
+  margin-top:64px;
+  width:100%;max-width:560px;
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:28px;
+  backdrop-filter:blur(10px);
+  text-align:left;
+}
+.demo-message{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:12px;
+  padding:16px 18px;
+  font-size:15px;
+  color:var(--text-muted);
+  margin-bottom:20px;
+  font-style:italic;
+  line-height:1.5;
+}
+.demo-message strong{color:var(--text);font-style:normal;font-weight:500}
+.demo-meta{
+  display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;
+}
+.tag{
+  background:rgba(95,245,181,0.1);
+  border:1px solid rgba(95,245,181,0.2);
+  color:var(--mint);
+  padding:4px 12px;
+  border-radius:50px;
+  font-size:12px;font-weight:500;
+}
+.demo-result{
+  border-left:2px solid var(--mint);
+  padding-left:16px;
+}
+.demo-result-label{
+  font-size:11px;font-weight:600;
+  color:var(--mint);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:8px;
+  opacity:0.8;
+}
+.demo-result-text{
+  font-size:14px;
+  color:var(--text);
+  line-height:1.6;
+}
+.demo-result-text em{
+  color:var(--mint);
+  font-style:normal;
+}
+.demo-reply{margin-top:16px}
+.demo-reply .demo-result-label{color:var(--text-faint)}
+.demo-reply .demo-result-text{color:var(--text-muted);font-style:italic}
+
+/* PROBLEM */
+.problem{
+  padding:100px 24px;
+  text-align:center;
+}
+.problem-inner{max-width:700px;margin:0 auto}
+.section-label{
+  font-size:11px;font-weight:600;
+  letter-spacing:2px;
+  color:var(--mint);
+  text-transform:uppercase;
+  margin-bottom:20px;
+  opacity:0.8;
+}
+.problem blockquote{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(22px,3.5vw,38px);
+  font-weight:600;
+  line-height:1.3;
+  letter-spacing:-0.5px;
+  color:var(--text);
+  margin-bottom:24px;
+}
+.problem blockquote .accent{color:var(--mint)}
+.problem p{
+  font-size:17px;
+  color:var(--text-muted);
+  line-height:1.8;
+  font-weight:300;
+  max-width:560px;
+  margin:0 auto;
+}
+
+/* DIVIDER */
+.divider{
+  width:100%;max-width:200px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--glass-border),transparent);
+  margin:0 auto;
+}
+
+/* HOW IT WORKS */
+.how{padding:100px 24px;max-width:900px;margin:0 auto}
+.how h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(28px,4vw,46px);
+  font-weight:700;
+  letter-spacing:-0.8px;
+  margin-bottom:64px;
+  text-align:center;
+}
+.steps{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  align-items:start;
+  gap:0;
+}
+.step{text-align:center;padding:0 16px}
+.step-num{
+  width:52px;height:52px;
+  background:var(--mint-glow);
+  border:1px solid rgba(95,245,181,0.25);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+  font-family:'Comfortaa',sans-serif;
+  font-size:20px;font-weight:700;
+  color:var(--mint);
+}
+.step h3{
+  font-size:16px;font-weight:600;
+  margin-bottom:8px;
+  color:var(--text);
+}
+.step p{
+  font-size:14px;
+  color:var(--text-muted);
+  line-height:1.6;
+}
+.step-arrow{
+  font-size:22px;
+  color:var(--mint);
+  opacity:0.4;
+  padding-top:14px;
+  align-self:start;
+}
+
+/* FEATURES */
+.features{padding:100px 24px;max-width:1000px;margin:0 auto;text-align:center}
+.features h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(28px,4vw,46px);
+  font-weight:700;
+  letter-spacing:-0.8px;
+  margin-bottom:16px;
+}
+.features .sub{
+  color:var(--text-muted);
+  font-size:17px;
+  margin-bottom:56px;
+  font-weight:300;
+}
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.feature-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:16px;
+  padding:28px 24px;
+  text-align:left;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.feature-card:hover{
+  background:var(--glass-hover);
+  border-color:rgba(95,245,181,0.2);
+  transform:translateY(-3px);
+}
+.feature-card.active{
+  border-color:rgba(95,245,181,0.3);
+}
+.feature-card.coming-soon{opacity:0.55}
+.feature-icon{
+  width:40px;height:40px;
+  background:var(--mint-glow);
+  border:1px solid rgba(95,245,181,0.2);
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+  font-size:18px;
+}
+.feature-card h3{font-size:16px;font-weight:600;margin-bottom:8px}
+.feature-card p{font-size:13px;color:var(--text-muted);line-height:1.6}
+.badge{
+  display:inline-block;
+  font-size:10px;font-weight:600;
+  letter-spacing:0.8px;
+  padding:3px 10px;
+  border-radius:50px;
+  margin-top:12px;
+  text-transform:uppercase;
+}
+.badge-live{
+  background:rgba(95,245,181,0.15);
+  color:var(--mint);
+  border:1px solid rgba(95,245,181,0.25);
+}
+.badge-soon{
+  background:rgba(255,255,255,0.05);
+  color:var(--text-faint);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* PRICING */
+.pricing{padding:100px 24px;max-width:800px;margin:0 auto;text-align:center}
+.pricing h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(28px,4vw,46px);
+  font-weight:700;
+  letter-spacing:-0.8px;
+  margin-bottom:16px;
+}
+.pricing .sub{
+  color:var(--text-muted);font-size:17px;
+  margin-bottom:56px;font-weight:300;
+}
+.pricing-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.plan{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:36px 32px;
+  text-align:left;
+  position:relative;
+}
+.plan.pro{
+  border-color:rgba(95,245,181,0.3);
+  background:rgba(95,245,181,0.04);
+}
+.plan-label{
+  font-size:12px;font-weight:600;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:16px;
+}
+.plan.pro .plan-label{color:var(--mint)}
+.plan-price{
+  font-family:'Comfortaa',sans-serif;
+  font-size:42px;font-weight:700;
+  letter-spacing:-1px;
+  margin-bottom:4px;
+}
+.plan-period{font-size:13px;color:var(--text-muted);margin-bottom:28px}
+.plan-features{list-style:none;margin-bottom:32px}
+.plan-features li{
+  font-size:14px;
+  color:var(--text-muted);
+  padding:8px 0;
+  border-bottom:1px solid var(--glass-border);
+  display:flex;align-items:center;gap:10px;
+}
+.plan-features li:last-child{border:none}
+.check{color:var(--mint);font-weight:700;font-size:16px}
+.plan-btn{
+  display:block;
+  text-align:center;
+  padding:12px 24px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;font-size:15px;
+  transition:all .25s;
+  font-family:'Inter',sans-serif;
+}
+.plan-btn-free{
+  border:1px solid var(--glass-border);
+  color:var(--text-muted);
+}
+.plan-btn-free:hover{
+  border-color:rgba(255,255,255,0.2);
+  color:var(--text);
+}
+.plan-btn-pro{
+  background:var(--mint);
+  color:#0A0D0C;
+}
+.plan-btn-pro:hover{
+  background:#fff;
+  box-shadow:0 8px 30px rgba(95,245,181,0.3);
+}
+
+/* FINAL CTA */
+.final-cta{
+  padding:120px 24px;
+  text-align:center;
+  position:relative;
+}
+.final-cta::before{
+  content:'';
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:600px;height:400px;
+  background:radial-gradient(ellipse, rgba(95,245,181,0.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.final-cta h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(26px,4.5vw,58px);
+  font-weight:700;
+  letter-spacing:-1px;
+  max-width:700px;
+  margin:0 auto 20px;
+  line-height:1.15;
+}
+.final-cta h2 .mint{color:var(--mint)}
+.final-cta p{
+  font-size:18px;
+  color:var(--text-muted);
+  margin-bottom:40px;
+  font-weight:300;
+}
+.final-cta .btn-primary{font-size:17px;padding:16px 44px}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--glass-border);
+  padding:32px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+footer .logo{font-size:16px;opacity:0.6}
+footer p{font-size:13px;color:var(--text-faint)}
+
+/* DEMO CYCLE ANIMATION */
+.typing{
+  display:inline-block;
+  border-right:2px solid var(--mint);
+  animation:blink .8s step-end infinite;
+}
+@keyframes blink{50%{border-color:transparent}}
+
+/* MOBILE */
+@media(max-width:768px){
+  header{padding:16px 20px}
+  nav{display:none}
+  .steps{grid-template-columns:1fr;gap:32px}
+  .step-arrow{display:none}
+  .pricing-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">WhatYou<span>Mean</span></a>
+  <nav>
+    <a href="#nasil-calisir">Nasıl Çalışır</a>
+    <a href="#ozellikler">Özellikler</a>
+    <a href="#fiyatlar">Fiyatlar</a>
+  </nav>
+  <a href="https://whatyoumean-app.netlify.app" class="cta-btn">Hemen Dene →</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">
+    <span></span>
+    Yapay zeka destekli anlam çözücü
+  </div>
+
+  <h1>
+    Söylediğini değil,<br>
+    <span class="mint">ne demek istediğini</span><br>
+    <span class="dim">anlıyoruz.</span>
+  </h1>
+
+  <p class="hero-sub">
+    Mesajların arkasındaki gerçek duyguyu, niyeti ve alt metni saniyeler içinde çöz. İlişkilerinde daha iyi anla, daha iyi iletişim kur.
+  </p>
+
+  <div class="hero-actions">
+    <a href="https://whatyoumean-app.netlify.app" class="btn-primary">
+      Ücretsiz Dene
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="#nasil-calisir" class="btn-secondary">Nasıl çalışır?</a>
+  </div>
+
+  <!-- LIVE DEMO CARD -->
+  <div class="hero-demo">
+    <div class="demo-message">
+      <strong>Mesaj:</strong> "Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂"
+    </div>
+    <div class="demo-meta">
+      <span class="tag">💑 Sevgili</span>
+      <span class="tag">🎯 Dürüst</span>
+    </div>
+    <div class="demo-result">
+      <div class="demo-result-label">Alt Metin</div>
+      <div class="demo-result-text">
+        Bu mesaj onay değil — <em>yorgunluk ve hayal kırıklığı</em>. "Sen bilirsin" aslında "görüşüm önemsenmediğini hissediyorum" demek. Emoji durumu yumuşatmak için kullanılmış, ama altındaki gerilim hâlâ orada.
+      </div>
+    </div>
+    <div class="demo-result demo-reply">
+      <div class="demo-result-label">Önerilen Yanıt</div>
+      <div class="demo-result-text">
+        "Hayır, ben sadece ne istediğini anlamak istiyorum. Seninle birlikte karar vermek istiyorum, sadece benim dediğim olsun diye değil."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="divider" style="margin-bottom:100px"></div>
+  <div class="problem-inner">
+    <div class="section-label">Neden WhatYouMean?</div>
+    <blockquote>
+      "Çoğu kavga kötü niyetten değil,<br>
+      <span class="accent">yanlış anlamaktan</span> doğar."
+    </blockquote>
+    <p>
+      Bazen bir mesaj gönderilir, ama asıl söylenmek istenen bambaşkadır. 
+      Yorgunluk, kırgınlık, sınır ihlali — hepsi kelimelerin arkasına saklanır. 
+      Biz o maskeleri kaldırıyoruz.
+    </p>
+  </div>
+  <div class="divider" style="margin-top:100px"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="nasil-calisir">
+  <div class="how">
+    <div class="section-label" style="text-align:center;margin-bottom:16px">Nasıl Çalışır</div>
+    <h2>3 adımda mesajın gerçek anlamı</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Mesajı yapıştır</h3>
+        <p>Çözmek istediğin mesajı metin kutusuna yaz ya da yapıştır.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Kişi &amp; ton seç</h3>
+        <p>Kim gönderdi? Hangi tonda çözülsün — dürüst, şefkatli, komik?</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Alt metni gör</h3>
+        <p>AI mesajın arkasındaki gerçek duyguyu ve önerilen yanıtı üretir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="ozellikler">
+  <div class="features">
+    <div class="section-label">Özellikler</div>
+    <h2>Anlamak için her şey</h2>
+    <p class="sub">Şu an aktif olan ve yakında gelecek özellikler.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card active">
+        <div class="feature-icon">🔍</div>
+        <h3>Message Decoder</h3>
+        <p>Mesajın alt metnini, duygusal tonunu ve gerçek niyetini AI ile çöz. 15 ilişki tipi, 5 çözüm tonu.</p>
+        <div class="badge badge-live">● Aktif</div>
+      </div>
+
+      <div class="feature-card coming-soon">
+        <div class="feature-icon">🚩</div>
+        <h3>Red Flag Detector</h3>
+        <p>Mesajlardaki manipülasyon, gaslighting veya sınır ihlali örüntülerini otomatik tespit et.</p>
+        <div class="badge badge-soon">Yakında</div>
+      </div>
+
+      <div class="feature-card coming-soon">
+        <div class="feature-icon">🧠</div>
+        <h3>Memory Engine</h3>
+        <p>Kişileri kaydet, geçmiş decode'larına dayalı ilişki analizi al. Örüntüleri gör.</p>
+        <div class="badge badge-soon">Yakında</div>
+      </div>
+
+      <div class="feature-card coming-soon">
+        <div class="feature-icon">🌐</div>
+        <h3>Meaning Translator</h3>
+        <p>Aynı mesaj farklı kültürlerde ne anlama gelir? TR/US/Japon/Latin kültürel analizi.</p>
+        <div class="badge badge-soon">Yakında</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="fiyatlar">
+  <div class="pricing">
+    <div class="section-label">Fiyatlar</div>
+    <h2>Basit ve şeffaf</h2>
+    <p class="sub">Başlamak ücretsiz. Sınırsız için Pro.</p>
+
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-label">Ücretsiz</div>
+        <div class="plan-price">₺0</div>
+        <div class="plan-period">sonsuza dek ücretsiz</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> Günde 5 decode</li>
+          <li><span class="check">✓</span> Tüm ilişki tipleri</li>
+          <li><span class="check">✓</span> Tüm çözüm tonları</li>
+          <li><span class="check">✓</span> 7 dil desteği</li>
+        </ul>
+        <a href="https://whatyoumean-app.netlify.app" class="plan-btn plan-btn-free">Ücretsiz Başla</a>
+      </div>
+
+      <div class="plan pro">
+        <div class="plan-label">Pro</div>
+        <div class="plan-price" style="color:var(--mint)">₺145</div>
+        <div class="plan-period">/ ay · istediğin zaman iptal et</div>
+        <ul class="plan-features">
+          <li><span class="check">✓</span> <strong>Sınırsız decode</strong></li>
+          <li><span class="check">✓</span> Tüm ücretsiz özellikler</li>
+          <li><span class="check">✓</span> Memory Engine (yakında)</li>
+          <li><span class="check">✓</span> Öncelikli yeni özellikler</li>
+        </ul>
+        <a href="https://whatyoumean-app.netlify.app" class="plan-btn plan-btn-pro">Pro'ya Geç →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>
+    Anlamak, insan ilişkilerinin<br>
+    en güçlü <span class="mint">süper gücüdür.</span>
+  </h2>
+  <p>Mesajların arkasını çözmeye bugün başla.</p>
+  <a href="https://whatyoumean-app.netlify.app" class="btn-primary">
+    Hemen Dene — Ücretsiz
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">WhatYou<span>Mean</span></a>
+  <p>Mesajların arkasındaki gerçeği bul.</p>
+</footer>
+
+<script>
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#')return;
+    const target=document.querySelector(href);
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
+  })
+});
+
+// Header shadow on scroll
+window.addEventListener('scroll',()=>{
+  const h=document.querySelector('header');
+  if(window.scrollY>20){
+    h.style.boxShadow='0 4px 40px rgba(0,0,0,0.4)';
+  } else {
+    h.style.boxShadow='none';
+  }
+});
+
+// Staggered fade-in on scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach((entry,i)=>{
+    if(entry.isIntersecting){
+      entry.target.style.transition='opacity 0.6s ease, transform 0.6s ease';
+      entry.target.style.opacity='1';
+      entry.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.1});
+
+document.querySelectorAll('.feature-card,.plan,.step').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(20px)';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
