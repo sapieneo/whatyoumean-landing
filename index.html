@@ -4,139 +4,189 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WhatYouMean — Mesajların Arkasını Çöz</title>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --mint:#5FF5B5;
-  --mint-dim:#3DD494;
-  --mint-glow:rgba(95,245,181,0.15);
-  --mint-glow-strong:rgba(95,245,181,0.25);
   --bg:#0A0D0C;
-  --bg2:#0F1410;
-  --bg3:#141A16;
   --glass:rgba(255,255,255,0.04);
   --glass-border:rgba(255,255,255,0.08);
   --glass-hover:rgba(255,255,255,0.07);
   --text:#F0F4F1;
   --text-muted:rgba(240,244,241,0.55);
   --text-faint:rgba(240,244,241,0.3);
+  --copper:#B87333;
+  --lavender:#B8A9C9;
+  --rose:#C9A09A;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
 .orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;}
-.orb1{width:600px;height:600px;background:radial-gradient(circle, rgba(95,245,181,0.08) 0%, transparent 70%);top:-200px;left:-200px;}
-.orb2{width:500px;height:500px;background:radial-gradient(circle, rgba(95,245,181,0.05) 0%, transparent 70%);bottom:10%;right:-150px;}
-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,13,12,0.75);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);transition:all .3s;}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(95,245,181,0.07) 0%,transparent 70%);top:-200px;left:-200px;}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(184,169,201,0.06) 0%,transparent 70%);bottom:10%;right:-150px;}
+.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(184,115,51,0.05) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,13,12,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);}
 .logo{font-family:'Comfortaa',sans-serif;font-size:20px;font-weight:700;color:var(--mint);letter-spacing:-0.3px;text-decoration:none;}
-.logo span{color:var(--text);opacity:0.7}
+.logo span{color:var(--text);opacity:0.6}
 nav{display:flex;align-items:center;gap:32px;}
-nav a{color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:400;transition:color .2s;}
+nav a{color:var(--text-muted);text-decoration:none;font-size:14px;transition:color .2s;}
 nav a:hover{color:var(--text)}
 .header-right{display:flex;align-items:center;gap:16px;}
 .lang-switcher{display:flex;gap:4px;}
 .lang-btn{background:none;border:1px solid var(--glass-border);color:var(--text-muted);padding:5px 10px;border-radius:50px;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
-.lang-btn:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
-.lang-btn.active{background:var(--mint-glow);border-color:rgba(95,245,181,0.3);color:var(--mint);}
-.cta-btn{background:var(--mint);color:#0A0D0C;padding:10px 24px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;font-family:'Inter',sans-serif;transition:all .2s;white-space:nowrap;}
+.lang-btn.active{background:rgba(95,245,181,0.1);border-color:rgba(95,245,181,0.3);color:var(--mint);}
+.cta-btn{background:var(--mint);color:#0A0D0C;padding:10px 24px;border-radius:50px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;white-space:nowrap;}
 .cta-btn:hover{background:#fff;transform:translateY(-1px);box-shadow:0 8px 30px rgba(95,245,181,0.3);}
 section{position:relative;z-index:1;}
+
+/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-border);padding:6px 16px;border-radius:50px;font-size:12px;font-weight:500;color:var(--mint);margin-bottom:32px;letter-spacing:0.5px;}
-.hero-tag span{width:6px;height:6px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite;}
+.hero-tag .dot{width:6px;height:6px;background:var(--mint);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
 h1{font-family:'Comfortaa',sans-serif;font-size:clamp(42px,6vw,80px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:24px;max-width:820px;}
 h1 .mint{color:var(--mint)}
-h1 .dim{opacity:0.45}
-.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text-muted);max-width:520px;margin-bottom:48px;font-weight:300;line-height:1.7;}
-.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;}
-.btn-primary{background:var(--mint);color:#0A0D0C;padding:14px 36px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;font-family:'Inter',sans-serif;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
+h1 .dim{opacity:0.4}
+.hero-sub{font-size:clamp(16px,2vw,20px);color:var(--text-muted);max-width:540px;margin-bottom:48px;font-weight:300;line-height:1.7;}
+.hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:72px;}
+.btn-primary{background:var(--mint);color:#0A0D0C;padding:14px 36px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;}
 .btn-primary:hover{background:#fff;transform:translateY(-2px);box-shadow:0 12px 40px rgba(95,245,181,0.35);}
-.btn-secondary{color:var(--text-muted);padding:14px 28px;font-size:15px;text-decoration:none;border:1px solid var(--glass-border);border-radius:50px;transition:all .25s;font-family:'Inter',sans-serif;}
+.btn-secondary{color:var(--text-muted);padding:14px 28px;font-size:15px;text-decoration:none;border:1px solid var(--glass-border);border-radius:50px;transition:all .25s;}
 .btn-secondary:hover{color:var(--text);border-color:rgba(255,255,255,0.2);}
-.hero-demo{margin-top:64px;width:100%;max-width:560px;background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:28px;backdrop-filter:blur(10px);text-align:left;}
-.demo-message{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--text-muted);margin-bottom:20px;font-style:italic;line-height:1.5;}
-.demo-message strong{color:var(--text);font-style:normal;font-weight:500;}
-.demo-meta{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
-.tag{background:rgba(95,245,181,0.1);border:1px solid rgba(95,245,181,0.2);color:var(--mint);padding:4px 12px;border-radius:50px;font-size:12px;font-weight:500;}
-.demo-result{border-left:2px solid var(--mint);padding-left:16px;}
-.demo-result-label{font-size:11px;font-weight:600;color:var(--mint);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;opacity:0.8;}
-.demo-result-text{font-size:14px;color:var(--text);line-height:1.6;}
-.demo-result-text em{color:var(--mint);font-style:normal;}
-.demo-reply{margin-top:16px;}
-.demo-reply .demo-result-label{color:var(--text-faint);}
-.demo-reply .demo-result-text{color:var(--text-muted);font-style:italic;}
+
+/* VISUAL — field atlas image */
+.field-atlas{width:100%;max-width:620px;border-radius:24px;overflow:hidden;border:1px solid var(--glass-border);box-shadow:0 40px 100px rgba(0,0,0,0.5),0 0 1px rgba(95,245,181,0.1);}
+.field-atlas img{width:100%;display:block;}
+
+/* DIVIDER */
+.divider{width:100%;max-width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-border),transparent);margin:0 auto;}
+
+/* PROBLEM */
 .problem{padding:100px 24px;text-align:center;}
 .problem-inner{max-width:700px;margin:0 auto;}
 .section-label{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--mint);text-transform:uppercase;margin-bottom:20px;opacity:0.8;}
-.problem blockquote{font-family:'Comfortaa',sans-serif;font-size:clamp(22px,3.5vw,38px);font-weight:600;line-height:1.3;letter-spacing:-0.5px;color:var(--text);margin-bottom:24px;}
-.problem blockquote .accent{color:var(--mint);}
+.problem blockquote{font-family:'Crimson Pro',serif;font-size:clamp(24px,3.5vw,40px);font-style:italic;line-height:1.3;color:var(--text);margin-bottom:24px;}
+.problem blockquote .accent{color:var(--lavender);}
 .problem p{font-size:17px;color:var(--text-muted);line-height:1.8;font-weight:300;max-width:560px;margin:0 auto;}
-.divider{width:100%;max-width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--glass-border),transparent);margin:0 auto;}
+
+/* HOW */
 .how{padding:100px 24px;max-width:900px;margin:0 auto;}
 .how h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:64px;text-align:center;}
-.steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;}
+.steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;}
 .step{text-align:center;padding:0 16px;}
-.step-num{width:52px;height:52px;background:var(--mint-glow);border:1px solid rgba(95,245,181,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Comfortaa',sans-serif;font-size:20px;font-weight:700;color:var(--mint);}
-.step h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.step-num{width:52px;height:52px;background:rgba(95,245,181,0.08);border:1px solid rgba(95,245,181,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-family:'Comfortaa',sans-serif;font-size:20px;font-weight:700;color:var(--mint);}
+.step h3{font-size:16px;font-weight:600;margin-bottom:8px;}
 .step p{font-size:14px;color:var(--text-muted);line-height:1.6;}
-.step-arrow{font-size:22px;color:var(--mint);opacity:0.4;padding-top:14px;align-self:start;}
-.features{padding:100px 24px;max-width:1000px;margin:0 auto;text-align:center;}
-.features h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:16px;}
+.step-arrow{font-size:22px;color:var(--mint);opacity:0.3;padding-top:14px;}
+
+/* FEATURES */
+.features{padding:100px 24px;max-width:1060px;margin:0 auto;text-align:center;}
+.features h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:12px;}
 .features .sub{color:var(--text-muted);font-size:17px;margin-bottom:56px;font-weight:300;}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
-.feature-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:28px 24px;text-align:left;transition:all .25s;position:relative;overflow:hidden;}
-.feature-card:hover{background:var(--glass-hover);border-color:rgba(95,245,181,0.2);transform:translateY(-3px);}
-.feature-card.active{border-color:rgba(95,245,181,0.3);}
-.feature-card.coming-soon{opacity:0.55;}
-.feature-icon{width:40px;height:40px;background:var(--mint-glow);border:1px solid rgba(95,245,181,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;}
-.feature-card h3{font-size:16px;font-weight:600;margin-bottom:8px;}
-.feature-card p{font-size:13px;color:var(--text-muted);line-height:1.6;}
-.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.8px;padding:3px 10px;border-radius:50px;margin-top:12px;text-transform:uppercase;}
-.badge-live{background:rgba(95,245,181,0.15);color:var(--mint);border:1px solid rgba(95,245,181,0.25);}
-.badge-soon{background:rgba(255,255,255,0.05);color:var(--text-faint);border:1px solid rgba(255,255,255,0.08);}
-.pricing{padding:100px 24px;max-width:800px;margin:0 auto;text-align:center;}
-.pricing h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:16px;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+
+/* Feature cards — special DNA card */
+.feature-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:28px 24px;text-align:left;transition:all .3s;position:relative;overflow:hidden;}
+.feature-card:hover{background:var(--glass-hover);transform:translateY(-4px);}
+.feature-card.active{border-color:rgba(95,245,181,0.25);}
+.feature-card.coming-soon{opacity:0.6;}
+.feature-card.dna-card{border-color:rgba(184,115,51,0.3);background:rgba(184,115,51,0.04);}
+.feature-card.dna-card:hover{border-color:rgba(184,115,51,0.5);background:rgba(184,115,51,0.07);}
+.feature-icon{width:44px;height:44px;background:rgba(95,245,181,0.08);border:1px solid rgba(95,245,181,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:20px;}
+.dna-card .feature-icon{background:rgba(184,115,51,0.1);border-color:rgba(184,115,51,0.2);}
+.feature-card h3{font-size:16px;font-weight:600;margin-bottom:6px;}
+.feature-card .subtitle{font-size:12px;color:var(--text-faint);margin-bottom:10px;font-family:'Crimson Pro',serif;font-style:italic;}
+.feature-card p{font-size:13px;color:var(--text-muted);line-height:1.65;}
+.badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.8px;padding:3px 10px;border-radius:50px;margin-top:14px;text-transform:uppercase;}
+.badge-live{background:rgba(95,245,181,0.12);color:var(--mint);border:1px solid rgba(95,245,181,0.2);}
+.badge-pro{background:rgba(184,115,51,0.15);color:var(--copper);border:1px solid rgba(184,115,51,0.25);}
+.badge-soon{background:rgba(255,255,255,0.04);color:var(--text-faint);border:1px solid var(--glass-border);}
+
+/* PRO SECTION */
+.pro-section{padding:100px 24px;max-width:1000px;margin:0 auto;}
+.pro-header{text-align:center;margin-bottom:56px;}
+.pro-header h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:12px;}
+.pro-header p{color:var(--text-muted);font-size:17px;font-weight:300;}
+.pro-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.pro-card{background:rgba(184,115,51,0.04);border:1px solid rgba(184,115,51,0.15);border-radius:20px;padding:28px 26px;position:relative;transition:all .3s;}
+.pro-card:hover{border-color:rgba(184,115,51,0.3);background:rgba(184,115,51,0.07);transform:translateY(-3px);}
+.pro-card-icon{font-size:28px;margin-bottom:14px;}
+.pro-card h3{font-size:17px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.pro-card p{font-size:14px;color:var(--text-muted);line-height:1.65;}
+.pro-card .example{margin-top:12px;background:rgba(255,255,255,0.03);border:1px solid var(--glass-border);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text-faint);font-family:'Crimson Pro',serif;font-style:italic;}
+.pro-card .example strong{color:var(--copper);font-style:normal;font-size:11px;font-family:'Inter',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px;}
+
+/* DEMO CARD */
+.demo-section{padding:60px 24px 100px;max-width:640px;margin:0 auto;}
+.hero-demo{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:28px;backdrop-filter:blur(10px);}
+.demo-message{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:16px 18px;font-size:15px;color:var(--text-muted);margin-bottom:18px;font-style:italic;line-height:1.5;}
+.demo-message strong{color:var(--text);font-style:normal;font-weight:500;}
+.demo-meta{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+.tag{background:rgba(95,245,181,0.08);border:1px solid rgba(95,245,181,0.18);color:var(--mint);padding:4px 12px;border-radius:50px;font-size:12px;font-weight:500;}
+.demo-result{border-left:2px solid var(--mint);padding-left:16px;margin-bottom:16px;}
+.demo-result-label{font-size:10px;font-weight:600;color:var(--mint);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;opacity:0.7;}
+.demo-result-text{font-size:14px;color:var(--text);line-height:1.6;}
+.demo-result-text em{color:var(--lavender);font-style:normal;}
+.demo-reply .demo-result-label{color:var(--text-faint);}
+.demo-reply .demo-result-text{color:var(--text-muted);font-style:italic;}
+
+/* PRICING */
+.pricing{padding:80px 24px 100px;max-width:800px;margin:0 auto;text-align:center;}
+.pricing h2{font-family:'Comfortaa',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;letter-spacing:-0.8px;margin-bottom:12px;}
 .pricing .sub{color:var(--text-muted);font-size:17px;margin-bottom:56px;font-weight:300;}
 .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.plan{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:36px 32px;text-align:left;position:relative;}
-.plan.pro{border-color:rgba(95,245,181,0.3);background:rgba(95,245,181,0.04);}
+.plan{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:36px 32px;text-align:left;}
+.plan.pro{border-color:rgba(184,115,51,0.3);background:rgba(184,115,51,0.04);}
 .plan-label{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;}
-.plan.pro .plan-label{color:var(--mint);}
+.plan.pro .plan-label{color:var(--copper);}
 .plan-price{font-family:'Comfortaa',sans-serif;font-size:42px;font-weight:700;letter-spacing:-1px;margin-bottom:4px;}
+.plan.pro .plan-price{color:var(--copper);}
 .plan-period{font-size:13px;color:var(--text-muted);margin-bottom:28px;}
 .plan-features{list-style:none;margin-bottom:32px;}
-.plan-features li{font-size:14px;color:var(--text-muted);padding:8px 0;border-bottom:1px solid var(--glass-border);display:flex;align-items:center;gap:10px;}
+.plan-features li{font-size:14px;color:var(--text-muted);padding:8px 0;border-bottom:1px solid var(--glass-border);display:flex;align-items:flex-start;gap:10px;}
 .plan-features li:last-child{border:none;}
-.check{color:var(--mint);font-weight:700;font-size:16px;}
-.plan-btn{display:block;text-align:center;padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:all .25s;font-family:'Inter',sans-serif;}
+.check{color:var(--mint);font-weight:700;font-size:16px;flex-shrink:0;}
+.check-copper{color:var(--copper);font-weight:700;font-size:16px;flex-shrink:0;}
+.plan-btn{display:block;text-align:center;padding:13px 24px;border-radius:50px;text-decoration:none;font-weight:600;font-size:15px;transition:all .25s;}
 .plan-btn-free{border:1px solid var(--glass-border);color:var(--text-muted);}
 .plan-btn-free:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
-.plan-btn-pro{background:var(--mint);color:#0A0D0C;}
-.plan-btn-pro:hover{background:#fff;box-shadow:0 8px 30px rgba(95,245,181,0.3);}
+.plan-btn-pro{background:var(--copper);color:#fff;}
+.plan-btn-pro:hover{background:#D4874A;box-shadow:0 8px 30px rgba(184,115,51,0.35);}
+
+/* FINAL CTA */
 .final-cta{padding:120px 24px;text-align:center;position:relative;}
-.final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse, rgba(95,245,181,0.06) 0%, transparent 70%);pointer-events:none;}
-.final-cta h2{font-family:'Comfortaa',sans-serif;font-size:clamp(26px,4.5vw,58px);font-weight:700;letter-spacing:-1px;max-width:700px;margin:0 auto 20px;line-height:1.15;}
+.final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(95,245,181,0.05) 0%,transparent 70%);pointer-events:none;}
+.final-cta h2{font-family:'Comfortaa',sans-serif;font-size:clamp(26px,4.5vw,56px);font-weight:700;letter-spacing:-1px;max-width:680px;margin:0 auto 20px;line-height:1.15;}
 .final-cta h2 .mint{color:var(--mint);}
 .final-cta p{font-size:18px;color:var(--text-muted);margin-bottom:40px;font-weight:300;}
-.final-cta .btn-primary{font-size:17px;padding:16px 44px;}
+
 footer{border-top:1px solid var(--glass-border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
-footer .logo{font-size:16px;opacity:0.6;}
 footer p{font-size:13px;color:var(--text-faint);}
-@media(max-width:768px){header{padding:16px 20px;}nav{display:none;}.steps{grid-template-columns:1fr;gap:32px;}.step-arrow{display:none;}.pricing-grid{grid-template-columns:1fr;}footer{flex-direction:column;gap:12px;text-align:center;}.header-right{gap:8px;}.lang-switcher{gap:2px;}.lang-btn{padding:4px 8px;font-size:11px;}}
+
+@media(max-width:768px){
+  header{padding:16px 20px;}
+  nav{display:none;}
+  .steps{grid-template-columns:1fr;gap:32px;}
+  .step-arrow{display:none;}
+  .pricing-grid,.pro-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;}
+  .header-right{gap:8px;}
+}
 </style>
 </head>
 <body>
-
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
 <header>
   <a href="#" class="logo">WhatYou<span>Mean</span></a>
   <nav>
     <a href="#nasil-calisir" data-i18n="nav_how">Nasıl Çalışır</a>
     <a href="#ozellikler" data-i18n="nav_features">Özellikler</a>
+    <a href="#pro" data-i18n="nav_pro">Pro</a>
     <a href="#fiyatlar" data-i18n="nav_pricing">Fiyatlar</a>
   </nav>
   <div class="header-right">
@@ -149,9 +199,10 @@ footer p{font-size:13px;color:var(--text-faint);}
   </div>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-tag">
-    <span></span>
+    <span class="dot"></span>
     <span data-i18n="hero_tag">Yapay zeka destekli anlam çözücü</span>
   </div>
   <h1>
@@ -159,9 +210,7 @@ footer p{font-size:13px;color:var(--text-faint);}
     <span class="mint" data-i18n="hero_h1_2">ne demek istediğini</span><br>
     <span class="dim" data-i18n="hero_h1_3">anlıyoruz.</span>
   </h1>
-  <p class="hero-sub" data-i18n="hero_sub">
-    Mesajların arkasındaki gerçek duyguyu, niyeti ve alt metni saniyeler içinde çöz. İlişkilerinde daha iyi anla, daha iyi iletişim kur.
-  </p>
+  <p class="hero-sub" data-i18n="hero_sub">Mesajların arkasındaki gerçek duyguyu, niyeti ve alt metni saniyeler içinde çöz. İlişkilerinde daha iyi anla, daha iyi iletişim kur.</p>
   <div class="hero-actions">
     <a href="https://whatyoumean-app.netlify.app" class="btn-primary">
       <span data-i18n="hero_cta">Ücretsiz Dene</span>
@@ -169,44 +218,24 @@ footer p{font-size:13px;color:var(--text-faint);}
     </a>
     <a href="#nasil-calisir" class="btn-secondary" data-i18n="hero_how">Nasıl çalışır?</a>
   </div>
-
-  <div class="hero-demo">
-    <div class="demo-message">
-      <strong data-i18n="demo_msg_label">Mesaj:</strong> <span data-i18n="demo_msg">"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂"</span>
-    </div>
-    <div class="demo-meta">
-      <span class="tag" data-i18n="demo_tag1">💑 Sevgili</span>
-      <span class="tag" data-i18n="demo_tag2">🎯 Dürüst</span>
-    </div>
-    <div class="demo-result">
-      <div class="demo-result-label" data-i18n="demo_subtext_label">Alt Metin</div>
-      <div class="demo-result-text" data-i18n="demo_subtext">
-        Bu mesaj onay değil — <em>yorgunluk ve hayal kırıklığı</em>. "Sen bilirsin" aslında "görüşüm önemsenmediğini hissediyorum" demek.
-      </div>
-    </div>
-    <div class="demo-result demo-reply">
-      <div class="demo-result-label" data-i18n="demo_reply_label">Önerilen Yanıt</div>
-      <div class="demo-result-text" data-i18n="demo_reply">
-        "Hayır, ben sadece ne istediğini anlamak istiyorum. Seninle birlikte karar vermek istiyorum."
-      </div>
-    </div>
+  <!-- Field Atlas Visual -->
+  <div class="field-atlas">
+    <img src="visual.png" alt="WhatYouMean Field Atlas — app overview">
   </div>
 </section>
 
+<!-- PROBLEM -->
 <section class="problem">
   <div class="divider" style="margin-bottom:100px"></div>
   <div class="problem-inner">
     <div class="section-label" data-i18n="problem_label">Neden WhatYouMean?</div>
-    <blockquote>
-      <span data-i18n="problem_quote">"Çoğu kavga kötü niyetten değil,<br><span class="accent">yanlış anlamaktan</span> doğar."</span>
-    </blockquote>
-    <p data-i18n="problem_p">
-      Bazen bir mesaj gönderilir, ama asıl söylenmek istenen bambaşkadır. Yorgunluk, kırgınlık, sınır ihlali — hepsi kelimelerin arkasına saklanır. Biz o maskeleri kaldırıyoruz.
-    </p>
+    <blockquote data-i18n="problem_quote">"Çoğu kavga kötü niyetten değil,<br><span class='accent'>yanlış anlamaktan</span> doğar."</blockquote>
+    <p data-i18n="problem_p">Bazen bir mesaj gönderilir, ama asıl söylenmek istenen bambaşkadır. Yorgunluk, kırgınlık, sınır ihlali — hepsi kelimelerin arkasına saklanır. Biz o maskeleri kaldırıyoruz.</p>
   </div>
   <div class="divider" style="margin-top:100px"></div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section id="nasil-calisir">
   <div class="how">
     <div class="section-label" style="text-align:center;margin-bottom:16px" data-i18n="how_label">Nasıl Çalışır</div>
@@ -220,7 +249,7 @@ footer p{font-size:13px;color:var(--text-faint);}
       <div class="step-arrow">→</div>
       <div class="step">
         <div class="step-num">2</div>
-        <h3 data-i18n="step2_h">Kişi &amp; ton seç</h3>
+        <h3 data-i18n="step2_h">Kişi & ton seç</h3>
         <p data-i18n="step2_p">Kim gönderdi? Hangi tonda çözülsün — dürüst, şefkatli, komik?</p>
       </div>
       <div class="step-arrow">→</div>
@@ -233,6 +262,29 @@ footer p{font-size:13px;color:var(--text-faint);}
   </div>
 </section>
 
+<!-- LIVE DEMO -->
+<section class="demo-section">
+  <div class="section-label" style="text-align:center;margin-bottom:24px" data-i18n="demo_label">Canlı Örnek</div>
+  <div class="hero-demo">
+    <div class="demo-message">
+      <strong data-i18n="demo_msg_label">Mesaj:</strong> <span data-i18n="demo_msg">"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂"</span>
+    </div>
+    <div class="demo-meta">
+      <span class="tag" data-i18n="demo_tag1">💑 Sevgili</span>
+      <span class="tag" data-i18n="demo_tag2">🎯 Dürüst</span>
+    </div>
+    <div class="demo-result">
+      <div class="demo-result-label" data-i18n="demo_subtext_label">Alt Metin</div>
+      <div class="demo-result-text" data-i18n="demo_subtext">Bu mesaj onay değil — <em>yorgunluk ve hayal kırıklığı</em>. "Sen bilirsin" aslında "görüşüm önemsenmediğini hissediyorum" demek.</div>
+    </div>
+    <div class="demo-result demo-reply">
+      <div class="demo-result-label" data-i18n="demo_reply_label">Önerilen Yanıt</div>
+      <div class="demo-result-text" data-i18n="demo_reply">"Hayır, ben sadece ne istediğini anlamak istiyorum. Seninle birlikte karar vermek istiyorum."</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
 <section id="ozellikler">
   <div class="features">
     <div class="section-label" data-i18n="feat_label">Özellikler</div>
@@ -245,28 +297,79 @@ footer p{font-size:13px;color:var(--text-faint);}
         <p data-i18n="f1_p">Mesajın alt metnini, duygusal tonunu ve gerçek niyetini AI ile çöz. 15 ilişki tipi, 5 çözüm tonu.</p>
         <div class="badge badge-live" data-i18n="badge_live">● Aktif</div>
       </div>
+      <div class="feature-card dna-card coming-soon">
+        <div class="feature-icon">🧬</div>
+        <h3 data-i18n="f_dna_h">Kültürel Genetik</h3>
+        <div class="subtitle" data-i18n="f_dna_sub">Cultural DNA Layer</div>
+        <p data-i18n="f_dna_p">Aynı mesaj farklı kültürlerde bambaşka anlam taşır. Japon sükutu, Türk dolaylılığı, Alman direktliği — kültürel kodu çözüyoruz.</p>
+        <div class="badge badge-pro" data-i18n="badge_pro">Pro</div>
+      </div>
+      <div class="feature-card coming-soon">
+        <div class="feature-icon">🧠</div>
+        <h3 data-i18n="f3_h">Memory Engine</h3>
+        <p data-i18n="f3_p">Kişileri kaydet, geçmiş decode'larına dayalı ilişki analizi al. Örüntüleri gör.</p>
+        <div class="badge badge-pro" data-i18n="badge_pro2">Pro</div>
+      </div>
       <div class="feature-card coming-soon">
         <div class="feature-icon">🚩</div>
         <h3 data-i18n="f2_h">Red Flag Detector</h3>
         <p data-i18n="f2_p">Mesajlardaki manipülasyon, gaslighting veya sınır ihlali örüntülerini otomatik tespit et.</p>
         <div class="badge badge-soon" data-i18n="badge_soon">Yakında</div>
       </div>
-      <div class="feature-card coming-soon">
-        <div class="feature-icon">🧠</div>
-        <h3 data-i18n="f3_h">Memory Engine</h3>
-        <p data-i18n="f3_p">Kişileri kaydet, geçmiş decode'larına dayalı ilişki analizi al. Örüntüleri gör.</p>
-        <div class="badge badge-soon" data-i18n="badge_soon2">Yakında</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRO SECTION -->
+<section id="pro">
+  <div class="pro-section">
+    <div class="pro-header">
+      <div class="section-label" data-i18n="pro_label">Pro Özellikleri</div>
+      <h2 data-i18n="pro_h2">Bağlamı tanıyan AI</h2>
+      <p data-i18n="pro_sub">Pro ile AI sadece mesajı değil, ilişkinin tüm hikayesini bilir.</p>
+    </div>
+    <div class="pro-grid">
+      <div class="pro-card">
+        <div class="pro-card-icon">👤</div>
+        <h3 data-i18n="pro_age_h">Yaş & Kişilik Profili</h3>
+        <p data-i18n="pro_age_p">Gönderenin yaşını ve kısa bir kişilik tanımını ekle. AI yorumunu buna göre kalibre eder.</p>
+        <div class="example">
+          <strong data-i18n="pro_example_label">Örnek</strong>
+          <span data-i18n="pro_age_ex">"45 yaşında, otoriter, duygularını ifade etmeyi sevmez"</span>
+        </div>
       </div>
-      <div class="feature-card coming-soon">
-        <div class="feature-icon">🌐</div>
-        <h3 data-i18n="f4_h">Meaning Translator</h3>
-        <p data-i18n="f4_p">Aynı mesaj farklı kültürlerde ne anlama gelir? TR/US/Japon/Latin kültürel analizi.</p>
-        <div class="badge badge-soon" data-i18n="badge_soon3">Yakında</div>
+      <div class="pro-card">
+        <div class="pro-card-icon">💬</div>
+        <h3 data-i18n="pro_rel_h">Kısa İlişki Tanımı</h3>
+        <p data-i18n="pro_rel_p">İlişkinin arka planını birkaç kelimeyle tanımla. Bağlam, yorumu tamamen değiştirir.</p>
+        <div class="example">
+          <strong data-i18n="pro_example_label2">Örnek</strong>
+          <span data-i18n="pro_rel_ex">"Abimin iş arkadaşı" · "Yeni kavga ettiğim kız arkadaşım" · "İlk mesajlaşmalarımız"</span>
+        </div>
+      </div>
+      <div class="pro-card">
+        <div class="pro-card-icon">🧬</div>
+        <h3 data-i18n="pro_dna_h">Kültürel DNA Katmanı</h3>
+        <p data-i18n="pro_dna_p">Her mesaj kültürel kodlarla yüklüdür. Kültürel arka planı seç, AI yorumu o kültürün iletişim örüntülerine göre yapar.</p>
+        <div class="example">
+          <strong data-i18n="pro_example_label3">Örnek</strong>
+          <span data-i18n="pro_dna_ex">TR dolaylılığı · Japon sükutu · Alman direktliği · US açıksözlülüğü</span>
+        </div>
+      </div>
+      <div class="pro-card">
+        <div class="pro-card-icon">📖</div>
+        <h3 data-i18n="pro_mem_h">İlişki Hafızası</h3>
+        <p data-i18n="pro_mem_p">Geçmiş decode'lar birikir, AI zamanla ilişki örüntülerini tanır ve analizini derinleştirir.</p>
+        <div class="example">
+          <strong data-i18n="pro_example_label4">Örnek</strong>
+          <span data-i18n="pro_mem_ex">"20+ decode'dan sonra ilişki analizi raporu" · Tekrarlayan örüntüler</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- PRICING -->
 <section id="fiyatlar">
   <div class="pricing">
     <div class="section-label" data-i18n="price_label">Fiyatlar</div>
@@ -281,19 +384,21 @@ footer p{font-size:13px;color:var(--text-faint);}
           <li><span class="check">✓</span> <span data-i18n="pf1">Günde 5 decode</span></li>
           <li><span class="check">✓</span> <span data-i18n="pf2">Tüm ilişki tipleri</span></li>
           <li><span class="check">✓</span> <span data-i18n="pf3">Tüm çözüm tonları</span></li>
-          <li><span class="check">✓</span> <span data-i18n="pf4">7 dil desteği</span></li>
+          <li><span class="check">✓</span> <span data-i18n="pf4">8 dil desteği</span></li>
         </ul>
         <a href="https://whatyoumean-app.netlify.app" class="plan-btn plan-btn-free" data-i18n="plan_free_btn">Ücretsiz Başla</a>
       </div>
       <div class="plan pro">
         <div class="plan-label" data-i18n="plan_pro_label">Pro</div>
-        <div class="plan-price" style="color:var(--mint)">₺145</div>
+        <div class="plan-price">₺145</div>
         <div class="plan-period" data-i18n="plan_pro_period">/ ay · istediğin zaman iptal et</div>
         <ul class="plan-features">
-          <li><span class="check">✓</span> <strong data-i18n="pp1">Sınırsız decode</strong></li>
-          <li><span class="check">✓</span> <span data-i18n="pp2">Tüm ücretsiz özellikler</span></li>
-          <li><span class="check">✓</span> <span data-i18n="pp3">Memory Engine (yakında)</span></li>
-          <li><span class="check">✓</span> <span data-i18n="pp4">Öncelikli yeni özellikler</span></li>
+          <li><span class="check-copper">✓</span> <strong data-i18n="pp1">Sınırsız decode</strong></li>
+          <li><span class="check-copper">✓</span> <span data-i18n="pp_age">Yaş & kişilik profili</span></li>
+          <li><span class="check-copper">✓</span> <span data-i18n="pp_rel">Kısa ilişki tanımı</span></li>
+          <li><span class="check-copper">✓</span> <span data-i18n="pp_dna">🧬 Kültürel DNA katmanı</span></li>
+          <li><span class="check-copper">✓</span> <span data-i18n="pp_mem">Memory Engine (yakında)</span></li>
+          <li><span class="check-copper">✓</span> <span data-i18n="pp4">Öncelikli yeni özellikler</span></li>
         </ul>
         <a href="https://whatyoumean-app.netlify.app" class="plan-btn plan-btn-pro" data-i18n="plan_pro_btn">Pro'ya Geç →</a>
       </div>
@@ -301,6 +406,7 @@ footer p{font-size:13px;color:var(--text-faint);}
   </div>
 </section>
 
+<!-- FINAL CTA -->
 <section class="final-cta">
   <h2>
     <span data-i18n="cta_h2_1">Anlamak, insan ilişkilerinin</span><br>
@@ -321,12 +427,13 @@ footer p{font-size:13px;color:var(--text-faint);}
 <script>
 const i18n = {
   tr: {
-    nav_how:"Nasıl Çalışır", nav_features:"Özellikler", nav_pricing:"Fiyatlar",
+    nav_how:"Nasıl Çalışır", nav_features:"Özellikler", nav_pro:"Pro", nav_pricing:"Fiyatlar",
     cta_try:"Hemen Dene →",
     hero_tag:"Yapay zeka destekli anlam çözücü",
     hero_h1_1:"Söylediğini değil,", hero_h1_2:"ne demek istediğini", hero_h1_3:"anlıyoruz.",
     hero_sub:"Mesajların arkasındaki gerçek duyguyu, niyeti ve alt metni saniyeler içinde çöz. İlişkilerinde daha iyi anla, daha iyi iletişim kur.",
     hero_cta:"Ücretsiz Dene", hero_how:"Nasıl çalışır?",
+    demo_label:"Canlı Örnek",
     demo_msg_label:"Mesaj:", demo_msg:"\"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂\"",
     demo_tag1:"💑 Sevgili", demo_tag2:"🎯 Dürüst",
     demo_subtext_label:"Alt Metin",
@@ -342,144 +449,168 @@ const i18n = {
     step3_h:"Alt metni gör", step3_p:"AI mesajın arkasındaki gerçek duyguyu ve önerilen yanıtı üretir.",
     feat_label:"Özellikler", feat_h2:"Anlamak için her şey", feat_sub:"Şu an aktif olan ve yakında gelecek özellikler.",
     f1_h:"Message Decoder", f1_p:"Mesajın alt metnini, duygusal tonunu ve gerçek niyetini AI ile çöz. 15 ilişki tipi, 5 çözüm tonu.",
-    f2_h:"Red Flag Detector", f2_p:"Mesajlardaki manipülasyon, gaslighting veya sınır ihlali örüntülerini otomatik tespit et.",
+    f_dna_h:"Kültürel Genetik", f_dna_sub:"Cultural DNA Layer", f_dna_p:"Aynı mesaj farklı kültürlerde bambaşka anlam taşır. Japon sükutu, Türk dolaylılığı, Alman direktliği — kültürel kodu çözüyoruz.",
     f3_h:"Memory Engine", f3_p:"Kişileri kaydet, geçmiş decode'larına dayalı ilişki analizi al. Örüntüleri gör.",
-    f4_h:"Meaning Translator", f4_p:"Aynı mesaj farklı kültürlerde ne anlama gelir? TR/US/Japon/Latin kültürel analizi.",
-    badge_live:"● Aktif", badge_soon:"Yakında", badge_soon2:"Yakında", badge_soon3:"Yakında",
+    f2_h:"Red Flag Detector", f2_p:"Mesajlardaki manipülasyon, gaslighting veya sınır ihlali örüntülerini otomatik tespit et.",
+    badge_live:"● Aktif", badge_pro:"Pro", badge_pro2:"Pro", badge_soon:"Yakında",
+    pro_label:"Pro Özellikleri", pro_h2:"Bağlamı tanıyan AI", pro_sub:"Pro ile AI sadece mesajı değil, ilişkinin tüm hikayesini bilir.",
+    pro_age_h:"Yaş & Kişilik Profili", pro_age_p:"Gönderenin yaşını ve kısa bir kişilik tanımını ekle. AI yorumunu buna göre kalibre eder.",
+    pro_rel_h:"Kısa İlişki Tanımı", pro_rel_p:"İlişkinin arka planını birkaç kelimeyle tanımla. Bağlam, yorumu tamamen değiştirir.",
+    pro_dna_h:"Kültürel DNA Katmanı", pro_dna_p:"Her mesaj kültürel kodlarla yüklüdür. Kültürel arka planı seç, AI yorumu o kültürün iletişim örüntülerine göre yapar.",
+    pro_mem_h:"İlişki Hafızası", pro_mem_p:"Geçmiş decode'lar birikir, AI zamanla ilişki örüntülerini tanır ve analizini derinleştirir.",
+    pro_example_label:"Örnek", pro_example_label2:"Örnek", pro_example_label3:"Örnek", pro_example_label4:"Örnek",
+    pro_age_ex:"\"45 yaşında, otoriter, duygularını ifade etmeyi sevmez\"",
+    pro_rel_ex:"\"Abimin iş arkadaşı\" · \"Yeni kavga ettiğim kız arkadaşım\" · \"İlk mesajlaşmalarımız\"",
+    pro_dna_ex:"TR dolaylılığı · Japon sükutu · Alman direktliği · US açıksözlülüğü",
+    pro_mem_ex:"\"20+ decode'dan sonra ilişki analizi raporu\" · Tekrarlayan örüntüler",
     price_label:"Fiyatlar", price_h2:"Basit ve şeffaf", price_sub:"Başlamak ücretsiz. Sınırsız için Pro.",
     plan_free_label:"Ücretsiz", plan_free_period:"sonsuza dek ücretsiz",
-    pf1:"Günde 5 decode", pf2:"Tüm ilişki tipleri", pf3:"Tüm çözüm tonları", pf4:"7 dil desteği",
+    pf1:"Günde 5 decode", pf2:"Tüm ilişki tipleri", pf3:"Tüm çözüm tonları", pf4:"8 dil desteği",
     plan_free_btn:"Ücretsiz Başla",
     plan_pro_label:"Pro", plan_pro_period:"/ ay · istediğin zaman iptal et",
-    pp1:"Sınırsız decode", pp2:"Tüm ücretsiz özellikler", pp3:"Memory Engine (yakında)", pp4:"Öncelikli yeni özellikler",
+    pp1:"Sınırsız decode", pp_age:"Yaş & kişilik profili", pp_rel:"Kısa ilişki tanımı",
+    pp_dna:"🧬 Kültürel DNA katmanı", pp_mem:"Memory Engine (yakında)", pp4:"Öncelikli yeni özellikler",
     plan_pro_btn:"Pro'ya Geç →",
     cta_h2_1:"Anlamak, insan ilişkilerinin", cta_h2_2:"en güçlü", cta_h2_3:"süper gücüdür.",
     cta_p:"Mesajların arkasını çözmeye bugün başla.", cta_btn:"Hemen Dene — Ücretsiz",
     footer_p:"Mesajların arkasındaki gerçeği bul."
   },
   en: {
-    nav_how:"How It Works", nav_features:"Features", nav_pricing:"Pricing",
+    nav_how:"How It Works", nav_features:"Features", nav_pro:"Pro", nav_pricing:"Pricing",
     cta_try:"Try Now →",
     hero_tag:"AI-powered subtext decoder",
     hero_h1_1:"Not what they said,", hero_h1_2:"but what they meant —", hero_h1_3:"decoded.",
     hero_sub:"Decode the real emotions, intent, and subtext behind messages in seconds. Understand better, communicate better.",
     hero_cta:"Try for Free", hero_how:"How does it work?",
+    demo_label:"Live Example",
     demo_msg_label:"Message:", demo_msg:"\"Fine, whatever you think is best 🙂\"",
     demo_tag1:"💑 Partner", demo_tag2:"🎯 Honest",
     demo_subtext_label:"Subtext",
-    demo_subtext:"This isn't agreement — it's <em>exhaustion and disappointment</em>. \"Whatever you think\" actually means \"I feel like my opinion doesn't matter here.\"",
+    demo_subtext:"This isn't agreement — it's <em>exhaustion and disappointment</em>. \"Whatever you think\" means \"I feel like my opinion doesn't matter.\"",
     demo_reply_label:"Suggested Reply",
-    demo_reply:"\"I actually want to decide this together. What do you really want?\"",
+    demo_reply:"\"I want to decide this together. What do you actually want?\"",
     problem_label:"Why WhatYouMean?",
     problem_quote:"\"Most conflicts come not from bad intentions,<br><span class='accent'>but from misunderstanding.</span>\"",
-    problem_p:"Sometimes a message is sent, but what's really meant is something else entirely. Exhaustion, hurt, crossed boundaries — all hidden behind words. We remove the masks.",
+    problem_p:"Sometimes a message is sent, but what's really meant is something else. Exhaustion, hurt, crossed boundaries — all hidden behind words. We remove the masks.",
     how_label:"How It Works", how_h2:"Real meaning in 3 steps",
-    step1_h:"Paste the message", step1_p:"Type or paste the message you want to decode into the text box.",
+    step1_h:"Paste the message", step1_p:"Type or paste the message you want to decode.",
     step2_h:"Choose person & tone", step2_p:"Who sent it? What tone — honest, compassionate, funny?",
-    step3_h:"See the subtext", step3_p:"AI reveals the real emotion behind the message and suggests a reply.",
-    feat_label:"Features", feat_h2:"Everything to understand", feat_sub:"Currently active and coming soon features.",
-    f1_h:"Message Decoder", f1_p:"Decode the subtext, emotional tone, and real intent of any message. 15 relationship types, 5 decode tones.",
-    f2_h:"Red Flag Detector", f2_p:"Automatically detect manipulation, gaslighting, or boundary violations in messages.",
-    f3_h:"Memory Engine", f3_p:"Save people, get relationship analysis based on past decodes. See patterns.",
-    f4_h:"Meaning Translator", f4_p:"What does the same message mean in different cultures? TR/US/Japanese/Latin analysis.",
-    badge_live:"● Live", badge_soon:"Coming Soon", badge_soon2:"Coming Soon", badge_soon3:"Coming Soon",
+    step3_h:"See the subtext", step3_p:"AI reveals the real emotion and suggests a reply.",
+    feat_label:"Features", feat_h2:"Everything to understand", feat_sub:"Currently active and coming soon.",
+    f1_h:"Message Decoder", f1_p:"Decode subtext, emotional tone and real intent. 15 relationship types, 5 tones.",
+    f_dna_h:"Cultural Genetics", f_dna_sub:"Cultural DNA Layer", f_dna_p:"The same message carries entirely different meaning across cultures. Japanese silence, Turkish indirectness, German directness — we decode the cultural code.",
+    f3_h:"Memory Engine", f3_p:"Save people, get relationship analysis from past decodes. See patterns.",
+    f2_h:"Red Flag Detector", f2_p:"Automatically detect manipulation, gaslighting or boundary violations.",
+    badge_live:"● Live", badge_pro:"Pro", badge_pro2:"Pro", badge_soon:"Coming Soon",
+    pro_label:"Pro Features", pro_h2:"AI that knows context", pro_sub:"Pro gives AI the full story — not just the message.",
+    pro_age_h:"Age & Personality Profile", pro_age_p:"Add the sender's age and a short personality description. AI calibrates its interpretation accordingly.",
+    pro_rel_h:"Short Relationship Context", pro_rel_p:"Describe the relationship background in a few words. Context completely changes the interpretation.",
+    pro_dna_h:"Cultural DNA Layer", pro_dna_p:"Every message is loaded with cultural codes. Choose the cultural background and AI interprets through that culture's communication patterns.",
+    pro_mem_h:"Relationship Memory", pro_mem_p:"Past decodes accumulate, AI learns to recognize relationship patterns over time and deepens its analysis.",
+    pro_example_label:"Example", pro_example_label2:"Example", pro_example_label3:"Example", pro_example_label4:"Example",
+    pro_age_ex:"\"45 years old, authoritative, avoids expressing emotions\"",
+    pro_rel_ex:"\"My brother's coworker\" · \"My girlfriend I just had a fight with\" · \"We just started talking\"",
+    pro_dna_ex:"Turkish indirectness · Japanese silence · German directness · US bluntness",
+    pro_mem_ex:"\"Relationship analysis report after 20+ decodes\" · Recurring patterns",
     price_label:"Pricing", price_h2:"Simple & transparent", price_sub:"Free to start. Pro for unlimited.",
     plan_free_label:"Free", plan_free_period:"free forever",
-    pf1:"5 decodes / day", pf2:"All relationship types", pf3:"All decode tones", pf4:"7 languages",
+    pf1:"5 decodes/day", pf2:"All relationship types", pf3:"All decode tones", pf4:"8 languages",
     plan_free_btn:"Start for Free",
     plan_pro_label:"Pro", plan_pro_period:"/ month · cancel anytime",
-    pp1:"Unlimited decodes", pp2:"All free features", pp3:"Memory Engine (coming soon)", pp4:"Priority new features",
+    pp1:"Unlimited decodes", pp_age:"Age & personality profile", pp_rel:"Relationship context",
+    pp_dna:"🧬 Cultural DNA layer", pp_mem:"Memory Engine (coming soon)", pp4:"Priority new features",
     plan_pro_btn:"Go Pro →",
     cta_h2_1:"Understanding is the most powerful", cta_h2_2:"superpower in", cta_h2_3:"human relationships.",
     cta_p:"Start decoding messages today.", cta_btn:"Try Now — Free",
     footer_p:"Find the truth behind the message."
   },
   ru: {
-    nav_how:"Как это работает", nav_features:"Функции", nav_pricing:"Цены",
+    nav_how:"Как работает", nav_features:"Функции", nav_pro:"Pro", nav_pricing:"Цены",
     cta_try:"Попробовать →",
     hero_tag:"AI-декодер скрытого смысла",
     hero_h1_1:"Не то, что сказали,", hero_h1_2:"а то, что имели в виду —", hero_h1_3:"расшифровано.",
-    hero_sub:"Раскрывайте настоящие эмоции, намерения и скрытый смысл сообщений за секунды. Понимайте лучше, общайтесь лучше.",
+    hero_sub:"Раскрывайте настоящие эмоции, намерения и скрытый смысл сообщений за секунды.",
     hero_cta:"Попробовать бесплатно", hero_how:"Как это работает?",
+    demo_label:"Живой пример",
     demo_msg_label:"Сообщение:", demo_msg:"\"Ладно, как хочешь, так и делай 🙂\"",
     demo_tag1:"💑 Партнёр", demo_tag2:"🎯 Честно",
     demo_subtext_label:"Скрытый смысл",
-    demo_subtext:"Это не согласие — это <em>усталость и разочарование</em>. «Как хочешь» на самом деле означает «я чувствую, что моё мнение не имеет значения».",
+    demo_subtext:"Это не согласие — <em>усталость и разочарование</em>. «Как хочешь» значит «я чувствую, что моё мнение не имеет значения».",
     demo_reply_label:"Предлагаемый ответ",
     demo_reply:"\"Нет, я хочу принять это решение вместе с тобой. Что ты на самом деле хочешь?\"",
     problem_label:"Почему WhatYouMean?",
     problem_quote:"\"Большинство конфликтов возникает не из-за злого умысла,<br><span class='accent'>а из-за недопонимания.</span>\"",
-    problem_p:"Иногда сообщение отправлено, но истинный смысл совсем другой. Усталость, обида, нарушение границ — всё это скрывается за словами. Мы снимаем маски.",
-    how_label:"Как это работает", how_h2:"Настоящий смысл за 3 шага",
-    step1_h:"Вставьте сообщение", step1_p:"Напишите или вставьте сообщение, которое хотите расшифровать.",
+    problem_p:"Иногда сообщение отправлено, но истинный смысл совсем другой. Усталость, обида, нарушение границ — всё скрывается за словами. Мы снимаем маски.",
+    how_label:"Как работает", how_h2:"Настоящий смысл за 3 шага",
+    step1_h:"Вставьте сообщение", step1_p:"Напишите или вставьте сообщение для расшифровки.",
     step2_h:"Выберите тон", step2_p:"Кто отправил? Какой тон — честный, сочувственный, юмористический?",
     step3_h:"Увидьте скрытый смысл", step3_p:"ИИ раскрывает настоящую эмоцию и предлагает ответ.",
     feat_label:"Функции", feat_h2:"Всё для понимания", feat_sub:"Активные и скоро появляющиеся функции.",
-    f1_h:"Message Decoder", f1_p:"Расшифруйте подтекст, эмоциональный тон и истинное намерение любого сообщения. 15 типов отношений, 5 тонов.",
-    f2_h:"Red Flag Detector", f2_p:"Автоматически выявляйте манипуляции, газлайтинг или нарушения границ в сообщениях.",
+    f1_h:"Message Decoder", f1_p:"Расшифруйте подтекст, тон и намерение любого сообщения. 15 типов отношений, 5 тонов.",
+    f_dna_h:"Культурная Генетика", f_dna_sub:"Cultural DNA Layer", f_dna_p:"Одно и то же сообщение несёт разный смысл в разных культурах. Японское молчание, турецкая косвенность, немецкая прямота — расшифровываем культурный код.",
     f3_h:"Memory Engine", f3_p:"Сохраняйте людей, получайте анализ отношений на основе прошлых расшифровок.",
-    f4_h:"Meaning Translator", f4_p:"Что означает одно и то же сообщение в разных культурах? Анализ TR/US/Японии/Латинской Америки.",
-    badge_live:"● Активно", badge_soon:"Скоро", badge_soon2:"Скоро", badge_soon3:"Скоро",
+    f2_h:"Red Flag Detector", f2_p:"Автоматически выявляйте манипуляции, газлайтинг или нарушения границ.",
+    badge_live:"● Активно", badge_pro:"Pro", badge_pro2:"Pro", badge_soon:"Скоро",
+    pro_label:"Pro Функции", pro_h2:"ИИ, знающий контекст", pro_sub:"Pro даёт ИИ полную историю — не только само сообщение.",
+    pro_age_h:"Возраст и профиль личности", pro_age_p:"Добавьте возраст отправителя и краткое описание личности. ИИ калибрует интерпретацию соответственно.",
+    pro_rel_h:"Краткий контекст отношений", pro_rel_p:"Опишите фон отношений в нескольких словах. Контекст полностью меняет интерпретацию.",
+    pro_dna_h:"Слой культурной ДНК", pro_dna_p:"Каждое сообщение несёт культурные коды. Выберите культурный фон и ИИ интерпретирует через паттерны общения этой культуры.",
+    pro_mem_h:"Память об отношениях", pro_mem_p:"Прошлые расшифровки накапливаются, ИИ учится распознавать паттерны отношений со временем.",
+    pro_example_label:"Пример", pro_example_label2:"Пример", pro_example_label3:"Пример", pro_example_label4:"Пример",
+    pro_age_ex:"\"45 лет, авторитарный, избегает выражения эмоций\"",
+    pro_rel_ex:"\"Коллега моего брата\" · «Девушка, с которой я только что поругался» · «Мы только начали общаться»",
+    pro_dna_ex:"Турецкая косвенность · Японское молчание · Немецкая прямота · Американская откровенность",
+    pro_mem_ex:"\"Анализ отношений после 20+ расшифровок\" · Повторяющиеся паттерны",
     price_label:"Цены", price_h2:"Просто и прозрачно", price_sub:"Начать бесплатно. Pro — без ограничений.",
     plan_free_label:"Бесплатно", plan_free_period:"бесплатно навсегда",
-    pf1:"5 расшифровок в день", pf2:"Все типы отношений", pf3:"Все тона расшифровки", pf4:"7 языков",
+    pf1:"5 расшифровок/день", pf2:"Все типы отношений", pf3:"Все тона", pf4:"8 языков",
     plan_free_btn:"Начать бесплатно",
     plan_pro_label:"Pro", plan_pro_period:"/ мес · отмена в любое время",
-    pp1:"Неограниченные расшифровки", pp2:"Все бесплатные функции", pp3:"Memory Engine (скоро)", pp4:"Приоритетные новые функции",
+    pp1:"Безлимитные расшифровки", pp_age:"Возраст и профиль", pp_rel:"Контекст отношений",
+    pp_dna:"🧬 Слой культурной ДНК", pp_mem:"Memory Engine (скоро)", pp4:"Приоритетные новые функции",
     plan_pro_btn:"Перейти на Pro →",
-    cta_h2_1:"Понимание — это самая мощная", cta_h2_2:"суперсила в", cta_h2_3:"человеческих отношениях.",
+    cta_h2_1:"Понимание — самая мощная", cta_h2_2:"суперсила в", cta_h2_3:"человеческих отношениях.",
     cta_p:"Начните расшифровывать сообщения сегодня.", cta_btn:"Попробовать — Бесплатно",
     footer_p:"Найдите правду за словами."
   }
 };
 
 let currentLang = 'tr';
-
 function setLang(lang) {
   currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent === lang.toUpperCase());
-  });
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (i18n[lang] && i18n[lang][key]) {
-      el.innerHTML = i18n[lang][key];
-    }
+    if (i18n[lang]?.[key]) el.innerHTML = i18n[lang][key];
   });
   document.documentElement.lang = lang;
 }
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const href = a.getAttribute('href');
-    if (href === '#') return;
-    const target = document.querySelector(href);
-    if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
   });
 });
 
-// Header shadow on scroll
 window.addEventListener('scroll', () => {
-  const h = document.querySelector('header');
-  h.style.boxShadow = window.scrollY > 20 ? '0 4px 40px rgba(0,0,0,0.4)' : 'none';
+  document.querySelector('header').style.boxShadow = window.scrollY > 20 ? '0 4px 40px rgba(0,0,0,0.5)' : 'none';
 });
 
-// Fade-in on scroll
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
     }
   });
-}, {threshold: 0.1});
+}, {threshold:0.08});
 
-document.querySelectorAll('.feature-card,.plan,.step').forEach(el => {
+document.querySelectorAll('.feature-card,.plan,.step,.pro-card').forEach(el => {
   el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  observer.observe(el);
+  el.style.transform = 'translateY(24px)';
+  obs.observe(el);
 });
 </script>
 </body>
