@@ -435,6 +435,94 @@ h1 .dim{color:var(--text-faint)}
 .badge-pro{background:var(--copper-light);color:var(--copper);border:1px solid var(--copper-border);}
 .badge-soon{background:var(--bg2);color:var(--text-faint);border:1px solid var(--border);}
 
+
+/* ── LEGAL RADAR SECTION ──────────────────── */
+.legal-section{
+  padding:80px 24px 110px;
+  max-width:1000px;margin:0 auto;
+}
+.legal-header{text-align:center;margin-bottom:56px;}
+.legal-header h2{
+  font-family:'Comfortaa',sans-serif;
+  font-size:clamp(28px,4vw,46px);font-weight:700;
+  letter-spacing:-0.8px;margin-bottom:14px;
+}
+.legal-header p{color:var(--text-muted);font-size:17px;font-weight:300;}
+
+.legal-demo{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;margin-bottom:40px;
+}
+.legal-banner{
+  border-radius:18px;padding:22px 24px;
+  cursor:pointer;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.legal-banner:hover{transform:translateY(-3px);}
+.legal-banner.clean{
+  background:rgba(95,180,130,0.06);
+  border:1px solid rgba(95,180,130,0.2);
+}
+.legal-banner.caution{
+  background:rgba(220,180,50,0.06);
+  border:1px solid rgba(220,180,50,0.2);
+}
+.legal-banner.violation{
+  background:rgba(210,100,40,0.06);
+  border:1px solid rgba(210,100,40,0.25);
+}
+.legal-banner.serious{
+  background:rgba(200,60,60,0.06);
+  border:1px solid rgba(200,60,60,0.25);
+}
+.lb-icon{font-size:22px;margin-bottom:10px;}
+.lb-level{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.clean .lb-level{color:rgba(60,160,100,0.8);}
+.caution .lb-level{color:rgba(200,160,40,0.9);}
+.violation .lb-level{color:rgba(200,90,30,0.9);}
+.serious .lb-level{color:rgba(190,60,60,0.9);}
+.lb-title{
+  font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px;
+}
+.lb-msg{
+  font-size:13px;color:var(--text-muted);
+  font-family:'Crimson Pro',serif;font-style:italic;
+  margin-bottom:10px;line-height:1.5;
+}
+.lb-result{font-size:13px;color:var(--text-muted);line-height:1.6;}
+.lb-tag{
+  display:inline-block;font-size:10px;font-weight:600;
+  padding:3px 10px;border-radius:50px;margin-top:10px;
+  letter-spacing:0.5px;
+}
+.clean .lb-tag{background:rgba(60,160,100,0.1);color:rgba(60,160,100,0.9);}
+.caution .lb-tag{background:rgba(200,160,40,0.1);color:rgba(200,160,40,0.9);}
+.violation .lb-tag{background:rgba(200,90,30,0.1);color:rgba(200,90,30,0.9);}
+.serious .lb-tag{background:rgba(190,60,60,0.1);color:rgba(190,60,60,0.9);}
+
+.legal-disclaimer{
+  text-align:center;font-size:13px;color:var(--text-faint);
+  font-family:'Crimson Pro',serif;font-style:italic;
+  margin-top:28px;
+}
+
+/* legal feature card */
+.feature-card.legal-card{
+  border-color:rgba(190,60,60,0.2);
+  background:rgba(190,60,60,0.03);
+}
+.feature-card.legal-card:hover{
+  border-color:rgba(190,60,60,0.4);
+  background:rgba(190,60,60,0.06);
+}
+.legal-card .feature-icon{
+  background:rgba(190,60,60,0.08);
+  border-color:rgba(190,60,60,0.2);
+}
+
 /* ── APP MOCKUP ──────────────────────────── */
 .mockup-section{
   padding:80px 24px 110px;
@@ -1017,7 +1105,70 @@ footer p{font-size:14px;color:var(--text-faint);}
         <p data-i18n="f2_p">Mesajlardaki manipülasyon, gaslighting veya sınır ihlali örüntülerini otomatik tespit et.</p>
         <div class="badge badge-soon" data-i18n="badge_soon">Yakında</div>
       </div>
+      <div class="feature-card legal-card active">
+        <div class="feature-icon">⚖️</div>
+        <h3 data-i18n="flegal_h">Legal & Ethics Radar</h3>
+        <div class="subtitle" data-i18n="flegal_sub">Hukuki & Etik Tarama</div>
+        <p data-i18n="flegal_p">Her decode'da otomatik etik tarama. Tehdit, hakaret, taciz tespiti — TCK maddeleri, hukuki risk seviyesi ve tazminat ihtimali.</p>
+        <div class="badge badge-pro" data-i18n="flegal_badge">● Aktif · Pro</div>
+      </div>
     </div>
+  </div>
+</section>
+
+
+<!-- LEGAL RADAR DEMO -->
+<section class="legal-section">
+  <div class="legal-header">
+    <div class="section-label" data-i18n="legal_label">Legal & Ethics Radar</div>
+    <h2 data-i18n="legal_h2">Her mesaj otomatik taranır.</h2>
+    <p data-i18n="legal_p">Decode sonucunda anlık etik ve hukuki risk analizi. 4 seviye, Türk hukuku referanslı.</p>
+  </div>
+
+  <div class="legal-demo">
+    <!-- Level 0: Clean -->
+    <div class="legal-banner clean">
+      <div class="lb-icon">✓</div>
+      <div class="lb-level" data-i18n="lb0_level">Seviye 0 · Temiz</div>
+      <div class="lb-title" data-i18n="lb0_title">Etik ve hukuki açıdan temiz</div>
+      <div class="lb-msg" data-i18n="lb0_msg">"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂"</div>
+      <div class="lb-result" data-i18n="lb0_result">Pasif agresif ton tespit edildi ancak hukuki veya etik bir ihlal yok.</div>
+      <span class="lb-tag" data-i18n="lb0_tag">✓ Temiz</span>
+    </div>
+
+    <!-- Level 1: Caution -->
+    <div class="legal-banner caution">
+      <div class="lb-icon">⚠️</div>
+      <div class="lb-level" data-i18n="lb1_level">Seviye 1 · Dikkat</div>
+      <div class="lb-title" data-i18n="lb1_title">Duygusal baskı tespit edildi</div>
+      <div class="lb-msg" data-i18n="lb1_msg">"Hep böyle yapıyorsun, hiç değişmeyeceksin."</div>
+      <div class="lb-result" data-i18n="lb1_result">Aşağılama tonu ve duygusal manipülasyon örüntüsü. Sınırda ifade.</div>
+      <span class="lb-tag" data-i18n="lb1_tag">⚠️ Dikkat</span>
+    </div>
+
+    <!-- Level 2: Violation -->
+    <div class="legal-banner violation">
+      <div class="lb-icon">🚩</div>
+      <div class="lb-level" data-i18n="lb2_level">Seviye 2 · Etik İhlal</div>
+      <div class="lb-title" data-i18n="lb2_title">Hakaret tespit edildi</div>
+      <div class="lb-msg" data-i18n="lb2_msg">"Sen gerçekten aptal birinin tekisin."</div>
+      <div class="lb-result" data-i18n="lb2_result">TCK 125 — Hakaret. Kişilik haklarına saldırı. Hukuki risk: Orta.</div>
+      <span class="lb-tag" data-i18n="lb2_tag">🚩 Etik İhlal · TCK 125</span>
+    </div>
+
+    <!-- Level 3: Serious -->
+    <div class="legal-banner serious">
+      <div class="lb-icon">⛔</div>
+      <div class="lb-level" data-i18n="lb3_level">Seviye 3 · Ciddi Risk</div>
+      <div class="lb-title" data-i18n="lb3_title">Tehdit + Hakaret tespit edildi</div>
+      <div class="lb-msg" data-i18n="lb3_msg">"Dediğimi yapmazsan seni döverim."</div>
+      <div class="lb-result" data-i18n="lb3_result">TCK 106 Tehdit + TCK 125 Hakaret. Bu mesaj mahkemede delil olarak kullanılabilir. Tazminat talep edilebilir.</div>
+      <span class="lb-tag" data-i18n="lb3_tag">⛔ Yüksek Risk · TCK 106+125</span>
+    </div>
+  </div>
+
+  <div class="legal-disclaimer" data-i18n="legal_disclaimer">
+    * Bu analiz yapay zeka tarafından üretilir ve hukuki tavsiye niteliği taşımaz. Kesin bilgi için bir avukata danışınız.
   </div>
 </section>
 
@@ -1205,6 +1356,26 @@ tr:{
   cta_h2_1:"Anlamak, insan ilişkilerinin",cta_h2_2:"en güçlü",cta_h2_3:"süper gücüdür.",
   cta_p:"Mesajların arkasını çözmeye bugün başla.",cta_btn:"Hemen Dene — Ücretsiz",
   footer_p:"Mesajların arkasındaki gerçeği bul.",
+  flegal_h:"Legal & Ethics Radar",flegal_sub:"Hukuki & Etik Tarama",
+  flegal_p:"Her decode'da otomatik etik tarama. Tehdit, hakaret, taciz tespiti — TCK maddeleri, hukuki risk seviyesi ve tazminat ihtimali.",
+  flegal_badge:"● Aktif · Pro",
+  legal_label:"Legal & Ethics Radar",
+  legal_h2:"Her mesaj otomatik taranır.",
+  legal_p:"Decode sonucunda anlık etik ve hukuki risk analizi. 4 seviye, Türk hukuku referanslı.",
+  lb0_level:"Seviye 0 · Temiz",lb0_title:"Etik ve hukuki açıdan temiz",
+  lb0_msg:"\"Tamam sen bilirsin, nasıl istersen öyle yapalım 🙂\"",
+  lb0_result:"Pasif agresif ton tespit edildi ancak hukuki veya etik bir ihlal yok.",lb0_tag:"✓ Temiz",
+  lb1_level:"Seviye 1 · Dikkat",lb1_title:"Duygusal baskı tespit edildi",
+  lb1_msg:"\"Hep böyle yapıyorsun, hiç değişmeyeceksin.\"",
+  lb1_result:"Aşağılama tonu ve duygusal manipülasyon örüntüsü. Sınırda ifade.",lb1_tag:"⚠️ Dikkat",
+  lb2_level:"Seviye 2 · Etik İhlal",lb2_title:"Hakaret tespit edildi",
+  lb2_msg:"\"Sen gerçekten aptal birinin tekisin.\"",
+  lb2_result:"TCK 125 — Hakaret. Kişilik haklarına saldırı. Hukuki risk: Orta.",lb2_tag:"🚩 Etik İhlal · TCK 125",
+  lb3_level:"Seviye 3 · Ciddi Risk",lb3_title:"Tehdit + Hakaret tespit edildi",
+  lb3_msg:"\"Dediğimi yapmazsan seni döverim.\"",
+  lb3_result:"TCK 106 Tehdit + TCK 125 Hakaret. Bu mesaj mahkemede delil olarak kullanılabilir. Tazminat talep edilebilir.",
+  lb3_tag:"⛔ Yüksek Risk · TCK 106+125",
+  legal_disclaimer:"* Bu analiz yapay zeka tarafından üretilir ve hukuki tavsiye niteliği taşımaz. Kesin bilgi için bir avukata danışınız.",
   atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
   atlas_quote:"\"We decode not what was said, but what could not be.\"",
   atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"YAKINDA",
@@ -1274,6 +1445,26 @@ en:{
   cta_h2_1:"Understanding is the most powerful",cta_h2_2:"superpower in",cta_h2_3:"human relationships.",
   cta_p:"Start decoding messages today.",cta_btn:"Try Now — Free",
   footer_p:"Find the truth behind the message.",
+  flegal_h:"Legal & Ethics Radar",flegal_sub:"Legal & Ethics Scanner",
+  flegal_p:"Automatic ethics scan on every decode. Threat, insult, harassment detection — legal articles, risk level and compensation likelihood.",
+  flegal_badge:"● Live · Pro",
+  legal_label:"Legal & Ethics Radar",
+  legal_h2:"Every message is automatically scanned.",
+  legal_p:"Instant ethical and legal risk analysis after every decode. 4 levels, Turkish law referenced.",
+  lb0_level:"Level 0 · Clean",lb0_title:"Ethically and legally clean",
+  lb0_msg:"\"Fine, whatever you think is best 🙂\"",
+  lb0_result:"Passive-aggressive tone detected but no legal or ethical violation found.",lb0_tag:"✓ Clean",
+  lb1_level:"Level 1 · Caution",lb1_title:"Emotional pressure detected",
+  lb1_msg:"\"You always do this, you'll never change.\"",
+  lb1_result:"Belittling tone and emotional manipulation pattern. Borderline expression.",lb1_tag:"⚠️ Caution",
+  lb2_level:"Level 2 · Ethical Violation",lb2_title:"Insult detected",
+  lb2_msg:"\"You are truly one of the stupidest people.\"",
+  lb2_result:"TCK 125 — Insult. Attack on personal rights. Legal risk: Medium.",lb2_tag:"🚩 Ethical Violation · TCK 125",
+  lb3_level:"Level 3 · Serious Risk",lb3_title:"Threat + Insult detected",
+  lb3_msg:"\"If you don't do what I say I'll beat you.\"",
+  lb3_result:"TCK 106 Threat + TCK 125 Insult. This message can be used as evidence in court. Compensation may be claimed.",
+  lb3_tag:"⛔ High Risk · TCK 106+125",
+  legal_disclaimer:"* This analysis is AI-generated and does not constitute legal advice. Please consult a lawyer for definitive information.",
   atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
   atlas_quote:"\"We decode not what was said, but what could not be.\"",
   atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"COMING SOON",
@@ -1343,6 +1534,26 @@ ru:{
   cta_h2_1:"Понимание — самая мощная",cta_h2_2:"суперсила в",cta_h2_3:"человеческих отношениях.",
   cta_p:"Начните расшифровывать сообщения сегодня.",cta_btn:"Попробовать — Бесплатно",
   footer_p:"Найдите правду за словами.",
+  flegal_h:"Legal & Ethics Radar",flegal_sub:"Правовой и этический сканер",
+  flegal_p:"Автоматическое сканирование после каждой расшифровки. Обнаружение угроз, оскорблений, домогательств — статьи закона, уровень риска и возможность компенсации.",
+  flegal_badge:"● Активно · Pro",
+  legal_label:"Legal & Ethics Radar",
+  legal_h2:"Каждое сообщение сканируется автоматически.",
+  legal_p:"Мгновенный анализ этических и правовых рисков после каждой расшифровки. 4 уровня.",
+  lb0_level:"Уровень 0 · Чисто",lb0_title:"Этически и юридически чисто",
+  lb0_msg:"\"Ладно, как хочешь 🙂\"",
+  lb0_result:"Обнаружен пассивно-агрессивный тон, но нарушений нет.",lb0_tag:"✓ Чисто",
+  lb1_level:"Уровень 1 · Внимание",lb1_title:"Обнаружено эмоциональное давление",
+  lb1_msg:"\"Ты всегда так делаешь, ты никогда не изменишься.\"",
+  lb1_result:"Пренебрежительный тон и манипуляция. Пограничное выражение.",lb1_tag:"⚠️ Внимание",
+  lb2_level:"Уровень 2 · Нарушение",lb2_title:"Обнаружено оскорбление",
+  lb2_msg:"\"Ты один из самых глупых людей.\"",
+  lb2_result:"Оскорбление. Нападение на личные права. Правовой риск: средний.",lb2_tag:"🚩 Нарушение",
+  lb3_level:"Уровень 3 · Серьёзный риск",lb3_title:"Угроза + оскорбление",
+  lb3_msg:"\"Если не сделаешь — побью.\"",
+  lb3_result:"Угроза + оскорбление. Это сообщение может быть использовано как доказательство в суде.",
+  lb3_tag:"⛔ Высокий риск",
+  legal_disclaimer:"* Этот анализ создан ИИ и не является юридической консультацией. Обратитесь к адвокату.",
   atlas_h1:"THE ARCHITECTURE", atlas_h2:"OF UNSPOKEN THINGS",
   atlas_quote:"\"Мы расшифровываем не то, что было сказано, а то, что не могло быть сказано.\"",
   atlas_badge_pro:"PRO", atlas_badge_pro2:"PRO", atlas_badge_soon:"СКОРО",
